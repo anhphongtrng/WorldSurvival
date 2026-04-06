@@ -6,19 +6,17 @@ public class SelfDestroy : MonoBehaviour
 
     private void Awake()
     {
-        enemyController = EnemyController.instance;
-    }
-    void Start()
-    {
-        
+        enemyController = GetComponent<EnemyController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(enemyController.damageReceiver.IsDead())
-        {
-            Destroy(gameObject);
-        }
+        if (enemyController.damageReceiver.IsDead())
+            DestroySelf();
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

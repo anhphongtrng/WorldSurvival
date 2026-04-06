@@ -4,40 +4,42 @@ public class PlayerBeamAttack : MonoBehaviour
 {
     [Header("Attack")]
     [SerializeField] float range = 5f;
-    [SerializeField] float damagePerSecond = 0.01f;
+    [SerializeField] float damagePerSecond = 0.1f;
     [SerializeField] LayerMask enemyLayer;
 
     [Header("Line")]
-    [SerializeField] LineController lineController;
     [SerializeField] LineController linePrefab;
 
+    protected LineController currentLine;
     protected Transform currentTarget;
 
     private void Awake()
     {
-        lineController = GameObject.Find("LaserLine").GetComponent<LineController>();
         enemyLayer = LayerMask.GetMask("Enemy");
     }
 
     void Update()
     {
         FindNearestTarget();
-        //SpawnLine();
 
         if (currentTarget == null)
         {
-            lineController.Hide();
+            if (currentLine != null)
+                currentLine.Hide();
+
             return;
         }
 
+        SpawnLine();
         AttackTarget();
     }
 
-    public void SpawnLine()
+    void SpawnLine()
     {
-        if (lineController != null) return;
+        if (currentLine != null) return;
 
-        lineController = Instantiate(linePrefab);
+        currentLine = Instantiate(linePrefab);
+        currentLine.transform.SetParent(transform);
     }
 
     void FindNearestTarget()
@@ -59,16 +61,14 @@ public class PlayerBeamAttack : MonoBehaviour
         }
 
         currentTarget = nearest;
-        Debug.Log("Current Target: " + (currentTarget != null ? currentTarget.name : "None"));
     }
 
     void AttackTarget()
     {
-        lineController.Draw(transform.position, currentTarget.position);
+        currentLine.Draw(transform.position, currentTarget.position);
 
         if (currentTarget.TryGetComponent<DamageReceiver>(out var dmg))
         {
-            //damagePerSecond *= Time.deltaTime; // Scale damage by time
             dmg.TakeDamage(damagePerSecond);
         }
     }
