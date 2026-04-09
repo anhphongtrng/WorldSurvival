@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SelfDestroy : MonoBehaviour
+public class EnemySelfDestroy : SelfDestroy
 {
     EnemyController enemyController;
 
@@ -13,10 +13,5 @@ public class SelfDestroy : MonoBehaviour
     {
         if (enemyController.damageReceiver.IsDead())
             DestroySelf();
-    }
-
-    public void DestroySelf()
-    {
-        Destroy(gameObject);
     }
 }

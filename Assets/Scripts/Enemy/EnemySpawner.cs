@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 spawnPosition = new(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0);
             GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             enemy.name = "Mummy Enemy " + (i + 1);
+            enemy.transform.SetParent(transform);
         }
     }
 

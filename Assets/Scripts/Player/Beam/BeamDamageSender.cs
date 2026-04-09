@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 
-public class PlayerBeamAttack : MonoBehaviour
+public class BeamDamageSender : DamageSender
 {
     [Header("Attack")]
-    [SerializeField] float range = 5f;
-    [SerializeField] float damagePerSecond = 0.1f;
-    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] protected float range = 5f;
+    [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected Transform firePos;
 
     [Header("Line")]
-    [SerializeField] LineController linePrefab;
-
+    [SerializeField] 
+    protected LineController linePrefab;
     protected LineController currentLine;
     protected Transform currentTarget;
 
     private void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
+    }
+
+    private void Reset()
+    {
+        damage = 1f;
     }
 
     void Update()
@@ -65,11 +70,11 @@ public class PlayerBeamAttack : MonoBehaviour
 
     void AttackTarget()
     {
-        currentLine.Draw(transform.position, currentTarget.position);
+        currentLine.Draw(firePos.transform.position, currentTarget.position);
 
         if (currentTarget.TryGetComponent<DamageReceiver>(out var dmg))
         {
-            dmg.TakeDamage(damagePerSecond);
+            dmg.TakeDamage(damage * Time.deltaTime);
         }
     }
 }
