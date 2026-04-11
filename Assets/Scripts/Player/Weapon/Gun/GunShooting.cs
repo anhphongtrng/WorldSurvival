@@ -39,7 +39,8 @@ public class GunShooting : MonoBehaviour
     {
         if (Mouse.current.leftButton.isPressed && Time.time >= shootTime && currentAmmo > 0)
         {
-            Instantiate(bulletPrefab, firePos.position, firePos.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, firePos.position, firePos.rotation);
+            bullet.transform.SetParent(transform);
             shootTime = Time.time + shootRate;
             currentAmmo--;
         }

@@ -46,6 +46,12 @@ TagManager:
   - name: Rock
     uniqueID: 1218987163
     locked: 0
+  - name: Grass
+    uniqueID: 3717114103
+    locked: 0
+  - name: Cactus
+    uniqueID: 3111216337
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
