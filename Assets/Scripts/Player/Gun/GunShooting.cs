@@ -7,10 +7,12 @@ public class GunShooting : MonoBehaviour
     [SerializeField] protected Transform firePos;
     protected float shootTime = 0f;
     protected float shootRate = 0.5f;
+    [SerializeField] protected int maxAmmo = 30;
+    [SerializeField] protected int currentAmmo;
 
     void Start()
     {
-        
+        currentAmmo = maxAmmo;
     }
 
     void Update()
@@ -18,12 +20,28 @@ public class GunShooting : MonoBehaviour
         Shoot();
     }
 
+    public int GetMaxAmmo()
+    {
+        return maxAmmo;
+    }
+
+    public int GetCurrentAmmo()
+    {
+        return currentAmmo;
+    }
+
+    public void SetCurrentAmmo(int ammo)
+    {
+        currentAmmo = ammo;
+    }
+
     public void Shoot()
     {
-        if (Mouse.current.leftButton.isPressed && Time.time >= shootTime)
+        if (Mouse.current.leftButton.isPressed && Time.time >= shootTime && currentAmmo > 0)
         {
             Instantiate(bulletPrefab, firePos.position, firePos.rotation);
             shootTime = Time.time + shootRate;
+            currentAmmo--;
         }
     }
 }
