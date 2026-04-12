@@ -2,30 +2,31 @@ using UnityEngine;
 
 public class DamageReceiver : MonoBehaviour
 {
-    [SerializeField] protected float hp;
+    [SerializeField] protected float maxHP = 5f;
+    [SerializeField] protected float currentHP;
 
-    void Start()
+    protected virtual void Start()
     {
-        hp = 3;
+        currentHP = maxHP;
     }
 
     public virtual void TakeDamage(float dmg)
     {
-        hp -= dmg;
+        currentHP -= dmg;
     }
 
-    public float GetHP()
+    public virtual float GetHP()
     {
-        return hp;
+        return currentHP;
     }
 
     public virtual void SetHP(float newHp)
     {
-        hp = newHp;
+        currentHP = Mathf.Clamp(newHp, 0, maxHP);
     }
 
-    public bool IsDead()
+    public virtual bool IsDead()
     {
-        return hp <= 0;
+        return currentHP <= 0;
     }
 }

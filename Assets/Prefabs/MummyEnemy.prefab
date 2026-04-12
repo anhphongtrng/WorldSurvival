@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7764499484841658085}
   - component: {fileID: 4812663343895725543}
   - component: {fileID: 8037086291553948572}
+  - component: {fileID: -3637868458352484444}
   - component: {fileID: 5763005984846767757}
-  - component: {fileID: 8154762231900718145}
   - component: {fileID: 5848561424512179846}
+  - component: {fileID: 2238397915622177795}
   m_Layer: 3
   m_Name: MummyEnemy
   m_TagString: Enemy
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1650675921
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -618180694, guid: 2315cc0495cb2054ea5dd392c1cff51e, type: 3}
@@ -141,6 +142,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!50 &-3637868458352484444
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742743277370378326}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &5763005984846767757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,19 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065ddb900c1e3ee45825d821a343333e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  hp: 0
---- !u!114 &8154762231900718145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7742743277370378326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8369a09afff049340a06a874d42070dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
+  maxHP: 5
+  currentHP: 0
 --- !u!114 &5848561424512179846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,3 +196,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   damageReceiver: {fileID: 0}
+--- !u!114 &2238397915622177795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742743277370378326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6675b7461fa45429d2eebcc3a5b692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  moveSpeed: 0

@@ -13,14 +13,10 @@ public class BeamDamageSender : DamageSender
     protected LineController currentLine;
     protected Transform currentTarget;
 
-    private void Awake()
+    protected override void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
-    }
-
-    private void Reset()
-    {
-        damage = 1f;
+        baseDamage = 1f;
     }
 
     void Update()
@@ -74,7 +70,7 @@ public class BeamDamageSender : DamageSender
 
         if (currentTarget.TryGetComponent<DamageReceiver>(out var dmg))
         {
-            dmg.TakeDamage(damage * Time.deltaTime);
+            dmg.TakeDamage(baseDamage * Time.deltaTime);
         }
     }
 }
