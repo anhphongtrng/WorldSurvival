@@ -20,7 +20,7 @@ public class MummyMovement : EnemyMovement
 
     public override void Move()
     {
-        if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < 10f)
+        if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < 5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, PlayerController.instance.transform.position, moveSpeed * Time.deltaTime);
             FlipEnemy();
