@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5619877384465510057}
   - component: {fileID: 646234427476185473}
   - component: {fileID: 1153923360305094561}
+  - component: {fileID: 6087709325645519009}
   - component: {fileID: 204001613419355936}
   m_Layer: 3
   m_Name: MummyEnemy
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347761ccb693d0e4a82539509b6befc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MummyAttack
-  attackCooldown: 5
+  skillCooldown: 0
 --- !u!114 &646234427476185473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +254,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cc3bf8a487a6e4496c433d676b8447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &6087709325645519009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742743277370378326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff58f586af30d0f4d90cdc102466cced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MummyDashSkill
+  skillCooldown: 0
+  dashDistance: 1
 --- !u!95 &204001613419355936
 Animator:
   serializedVersion: 7

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MummyAttack : EnemyAttack
+public class MummyMeleeSkill : EnemySkills
 {
     protected MummyController mummyController;
 
@@ -12,14 +12,14 @@ public class MummyAttack : EnemyAttack
 
     protected override void Update()
     {
-        TryAttack();
+        MeleeAttack();
     }
-    protected override void OnAttack()
+    protected override void OnSkill()
     {
         mummyController.mummyAnimation.TriggerAttack();
     }
 
-    protected void TryAttack()
+    protected void MeleeAttack()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
@@ -33,7 +33,7 @@ public class MummyAttack : EnemyAttack
         }
         else if (distanceToPlayer <= 1.5f)
         {
-            Attack();
+            UseSkill();
         }
     }
 
