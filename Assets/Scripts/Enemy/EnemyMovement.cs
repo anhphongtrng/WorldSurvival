@@ -12,7 +12,7 @@ public abstract class EnemyMovement : MonoBehaviour
 
     public abstract void Move();
 
-    protected void FlipEnemy()
+    protected virtual void FlipEnemy()
     {
         transform.localScale = new Vector3(PlayerController.instance.transform.position.x < transform.position.x ? 1 : -1, 1, 1);
     }
