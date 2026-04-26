@@ -23,7 +23,12 @@ public class FlyEnhanceSkill : EnemySkills
 
     protected void EnhanceAttack()
     {
-        UseSkill();
+        float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+
+        if (distanceToPlayer <= 7f)
+        {
+            UseSkill();
+        }
     }
 
 }

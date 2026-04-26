@@ -15,14 +15,27 @@ public class DamageReceiver : MonoBehaviour
         currentHP -= dmg;
     }
 
-    public virtual float GetHP()
+    public virtual float GetCurrentHP()
     {
         return currentHP;
+    }
+
+    public virtual float GetMaxHP()
+    {
+        return maxHP;
     }
 
     public virtual void SetHP(float newHp)
     {
         currentHP = Mathf.Clamp(newHp, 0, maxHP);
+    }
+
+    public virtual void HealHP(float amount)
+    {
+        if (IsDead()) return;
+
+        currentHP += amount;
+        currentHP = Mathf.Clamp(currentHP, -100, maxHP);
     }
 
     public virtual bool IsDead()
