@@ -24,11 +24,13 @@ public class SkillTreeManager : MonoBehaviour
     private void OnEnable()
     {
         SkillSlot.OnAbilityPointSpent += HandleAbilityPointsSpent;
+        SkillSlot.OnSkillMaxed += HandleSkillMaxed;
     }
 
     private void OnDisable()
     {
         SkillSlot.OnAbilityPointSpent -= HandleAbilityPointsSpent;
+        SkillSlot.OnSkillMaxed -= HandleSkillMaxed;
     }
 
     private void Start()
@@ -47,11 +49,22 @@ public class SkillTreeManager : MonoBehaviour
         skillPointText.text = ": " + availableSkillPoints.ToString();
     }
 
-    public void HandleAbilityPointsSpent(SkillSlot slot)
+    public void HandleAbilityPointsSpent(SkillSlot skillSlot)
     {
         if (availableSkillPoints > 0)
         {
             UpdateAbilityPoints(-1); // Decrease available skill points by 1 when a skill is upgraded
+        }
+    }
+
+    public void HandleSkillMaxed(SkillSlot skillSlot)
+    {
+        foreach (SkillSlot slot in skillSlots)
+        {
+            if(!slot.isUnlocked && slot.CanUnlockSkill())
+            {
+                slot.UnlockSkill(); // Unlock the skill if it meets the prerequisites
+            }
         }
     }
 

@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class SkillSlot : MonoBehaviour
 {
+    [SerializeField] protected List<SkillSlot> prerequisiteSkills; // List of prerequisite skills that must be unlocked before this skill can be unlocked
     [SerializeField] protected SkillSO skillSO;
 
     public int currentLevel;
@@ -16,6 +19,7 @@ public class SkillSlot : MonoBehaviour
 
     // Using Observer pattern to notify the SkillTreeManager when a skill is upgraded
     public static event Action<SkillSlot> OnAbilityPointSpent;
+    public static event Action<SkillSlot> OnSkillMaxed;
 
     private void OnValidate()
     {
@@ -49,7 +53,29 @@ public class SkillSlot : MonoBehaviour
         {
             currentLevel++;
             OnAbilityPointSpent?.Invoke(this); // Notify the SkillTreeManager that a skill point was spent
+            if (currentLevel >= skillSO.maxLevel)
+            {
+                OnSkillMaxed?.Invoke(this); // Notify that the skill has reached max level
+            }
             UpdateUI();
         }
+    }
+
+    public bool CanUnlockSkill()
+    {
+        foreach (SkillSlot prerequisite in prerequisiteSkills)
+        {
+            if (!prerequisite.isUnlocked || prerequisite.currentLevel < prerequisite.skillSO.maxLevel)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void UnlockSkill()
+    {
+        isUnlocked = true;
+        UpdateUI();
     }
 }
