@@ -1331,6 +1331,7 @@ GameObject:
   - component: {fileID: 280615789}
   - component: {fileID: 280615788}
   - component: {fileID: 280615791}
+  - component: {fileID: 280615792}
   m_Layer: 5
   m_Name: SkillsCanvas
   m_TagString: Untagged
@@ -1430,9 +1431,30 @@ CanvasGroup:
   m_GameObject: {fileID: 280615786}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &280615792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280615786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed6e099b9e941e4990fbd107e8dc19c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillTreeManager
+  skillSlots:
+  - {fileID: 2117731020}
+  - {fileID: 1626199996}
+  - {fileID: 1558898693}
+  - {fileID: 1668538620}
+  - {fileID: 838241077}
+  - {fileID: 1426155976}
+  skillPointText: {fileID: 554952365}
+  availableSkillPoints: 3
 --- !u!1001 &283119607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4902,6 +4924,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
   m_PrefabInstance: {fileID: 701805884}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &838241077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+  m_PrefabInstance: {fileID: 701805884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
 --- !u!1001 &841526113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4910,6 +4943,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1885614809}
     m_Modifications:
+    - target: {fileID: 1755937798573616321, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_text
+      value: Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: skillSO
+      value: 
+      objectReference: {fileID: 11400000, guid: e417967be9efdde44a8cd19bf1dc4b9b, type: 2}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035728865541332281, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5233972180137678507, guid: b450f5e36fa745e48b95ccef7cc0456d, type: 3}
     - target: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6922,6 +6971,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
   m_PrefabInstance: {fileID: 153004752}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1426155976 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+  m_PrefabInstance: {fileID: 153004752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
 --- !u!1 &1483223202
 GameObject:
   m_ObjectHideFlags: 0
@@ -37778,6 +37838,17 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 24.17}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1558898693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+  m_PrefabInstance: {fileID: 1318899784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
 --- !u!1 &1564679104
 GameObject:
   m_ObjectHideFlags: 0
@@ -37858,6 +37929,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
   m_PrefabInstance: {fileID: 841526113}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1626199996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+  m_PrefabInstance: {fileID: 841526113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
 --- !u!1 &1659844070
 GameObject:
   m_ObjectHideFlags: 0
@@ -37976,6 +38058,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
   m_PrefabInstance: {fileID: 1206312472}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1668538620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+  m_PrefabInstance: {fileID: 1206312472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
 --- !u!1 &1732706200
 GameObject:
   m_ObjectHideFlags: 0
@@ -38304,6 +38397,7 @@ GameObject:
   - component: {fileID: 1783311787}
   - component: {fileID: 1783311786}
   - component: {fileID: 1783311790}
+  - component: {fileID: 1783311791}
   m_Layer: 5
   m_Name: UIController
   m_TagString: Untagged
@@ -38408,6 +38502,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   textTimer: {fileID: 450846044}
   timer: {fileID: 1498330548}
+--- !u!225 &1783311791
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783311785}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1784409431
 GameObject:
   m_ObjectHideFlags: 0
@@ -39130,6 +39236,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
   m_PrefabInstance: {fileID: 4634691040486640202}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2117731020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+  m_PrefabInstance: {fileID: 4634691040486640202}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
 --- !u!224 &2141837524 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
@@ -39358,6 +39475,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1885614809}
     m_Modifications:
+    - target: {fileID: 1755937798573616321, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_text
+      value: 0/5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: skillSO
+      value: 
+      objectReference: {fileID: 11400000, guid: e417967be9efdde44a8cd19bf1dc4b9b, type: 2}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: isUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: currentLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035728865541332281, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5233972180137678507, guid: b450f5e36fa745e48b95ccef7cc0456d, type: 3}
+    - target: {fileID: 4035728865541332281, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035728865541332281, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035728865541332281, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4197852710550274004, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -39441,6 +39590,10 @@ PrefabInstance:
     - target: {fileID: 5826485086661015269, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_Name
       value: SkillButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372499096105190435, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

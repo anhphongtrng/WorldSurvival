@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7141883595242126082}
   - component: {fileID: 1755937798573616321}
   m_Layer: 5
-  m_Name: LevelText
+  m_Name: SkillLevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 89309110350391733}
   - component: {fileID: 1258754350178049868}
   - component: {fileID: 7372499096105190435}
+  - component: {fileID: 3542797842232923362}
   m_Layer: 5
   m_Name: SkillButton
   m_TagString: Untagged
@@ -334,3 +335,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3542797842232923362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826485086661015269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
+  skillSO: {fileID: 0}
+  currentLevel: 0
+  isUnlocked: 0
+  skillIcon: {fileID: 4035728865541332281}
+  skillLevelText: {fileID: 1755937798573616321}
+  skillButton: {fileID: 7372499096105190435}
