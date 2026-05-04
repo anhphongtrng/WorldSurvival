@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class SkillSlot : MonoBehaviour
 {
     [SerializeField] protected SkillSO skillSO;
@@ -11,6 +13,9 @@ public class SkillSlot : MonoBehaviour
     public Image skillIcon;
     public TextMeshProUGUI skillLevelText;
     public Button skillButton;
+
+    // Using Observer pattern to notify the SkillTreeManager when a skill is upgraded
+    public static event Action<SkillSlot> OnAbilityPointSpent;
 
     private void OnValidate()
     {
@@ -28,23 +33,22 @@ public class SkillSlot : MonoBehaviour
         {
             skillButton.interactable = true;
             skillLevelText.text = currentLevel.ToString() + "/" + skillSO.maxLevel.ToString();
-            skillIcon.color = Color.white; // Set to normal color when unlocked
+            skillIcon.color = Color.white;
         }
         else
         {
             skillButton.interactable = false;
             skillLevelText.text = "Locked";
-            skillIcon.color = Color.gray; // Set to gray when locked
+            skillIcon.color = Color.gray;
         }
     }
 
     public void TryUpgradeSkill()
     {
-        if (isUnlocked && currentLevel < skillSO.maxLevel)
+        if (isUnlocked && currentLevel < skillSO.maxLevel && SkillTreeManager.instance.availableSkillPoints > 0)
         {
-            // Here you would typically check if the player has enough skill points
-            // and then deduct them before upgrading the skill.
             currentLevel++;
+            OnAbilityPointSpent?.Invoke(this); // Notify the SkillTreeManager that a skill point was spent
             UpdateUI();
         }
     }
