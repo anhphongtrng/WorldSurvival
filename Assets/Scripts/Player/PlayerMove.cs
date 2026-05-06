@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] protected Vector2 moveInput;
-    protected float moveSpeed = 5f;
     protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
 
@@ -50,7 +49,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Move()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = moveInput * StatsController.instance.moveSpeed;
         if (moveInput.x < 0)
         {
             spriteRenderer.flipX = true;

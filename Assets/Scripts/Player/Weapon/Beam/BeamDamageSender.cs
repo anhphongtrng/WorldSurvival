@@ -16,7 +16,6 @@ public class BeamDamageSender : DamageSender
     protected override void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
-        baseDamage = 1f;
     }
 
     void Update()
@@ -70,7 +69,7 @@ public class BeamDamageSender : DamageSender
 
         if (currentTarget.TryGetComponent<DamageReceiver>(out var dmg))
         {
-            dmg.TakeDamage(baseDamage * Time.deltaTime);
+            dmg.TakeDamage(StatsController.instance.beamWeaponDamage * Time.deltaTime);
         }
     }
 }
