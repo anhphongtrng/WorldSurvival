@@ -1,9 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-public class SkillTreeManager : MonoBehaviour
+public class SkillTreeController : MonoBehaviour
 {
-    public static SkillTreeManager instance;
+    public static SkillTreeController instance;
 
     public SkillSlot[] skillSlots;
     public TextMeshProUGUI skillPointText;

@@ -26,4 +26,23 @@ public class StatsController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void UpdateMaxHealth(float amount)
+    {
+        maxHealth += amount;
+    }
+
+    public void UpdateBeamDamage(int amount)
+    {
+        beamWeaponDamage += amount;
+    }
+
+    public void UpdateGunDamage(int amount)
+    {
+        gunWeaponDamage += amount;
+    }
+    public void UpdateMoveSpeed(float amount)
+    {
+        moveSpeed += amount;
+    }
 }

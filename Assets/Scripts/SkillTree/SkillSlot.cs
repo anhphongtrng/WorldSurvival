@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class SkillSlot : MonoBehaviour
 {
     [SerializeField] protected List<SkillSlot> prerequisiteSkills; // List of prerequisite skills that must be unlocked before this skill can be unlocked
-    [SerializeField] protected SkillSO skillSO;
+    [SerializeField] public SkillSO skillSO;
 
     public int currentLevel;
     public bool isUnlocked;
@@ -49,7 +49,7 @@ public class SkillSlot : MonoBehaviour
 
     public void TryUpgradeSkill()
     {
-        if (isUnlocked && currentLevel < skillSO.maxLevel && SkillTreeManager.instance.availableSkillPoints > 0)
+        if (isUnlocked && currentLevel < skillSO.maxLevel && SkillTreeController.instance.availableSkillPoints > 0)
         {
             currentLevel++;
             OnAbilityPointSpent?.Invoke(this); // Notify the SkillTreeManager that a skill point was spent
