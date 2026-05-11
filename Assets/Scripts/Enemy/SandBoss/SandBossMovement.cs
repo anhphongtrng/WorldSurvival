@@ -4,6 +4,7 @@ public class SandBossMovement : EnemyMovement
 {
     protected override void Awake()
     {
+        base.Awake();
         moveSpeed = 1f;
     }
 
@@ -19,15 +20,5 @@ public class SandBossMovement : EnemyMovement
             transform.position = Vector3.MoveTowards(transform.position, PlayerController.instance.transform.position, moveSpeed * Time.deltaTime);
             FlipEnemy();
         }
-    }
-
-    protected override void FlipEnemy()
-    {
-        Vector3 scale = transform.localScale;
-
-        scale.x = Mathf.Abs(scale.x) *
-                  (PlayerController.instance.transform.position.x < transform.position.x ? 1 : -1);
-
-        transform.localScale = scale;
     }
 }

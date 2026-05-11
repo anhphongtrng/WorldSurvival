@@ -28,7 +28,7 @@ public class PlayerDamageReceiver : DamageReceiver
         StatsController.instance.currentHealth = Mathf.Clamp(newHp, 0, StatsController.instance.maxHealth);
     }
 
-    public override void HealHP(float amount)
+    public override void ChangeHP(float amount)
     {
         if (IsDead()) return;
 

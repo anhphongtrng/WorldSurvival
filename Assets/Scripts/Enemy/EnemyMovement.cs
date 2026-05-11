@@ -4,17 +4,19 @@ public abstract class EnemyMovement : MonoBehaviour
 {
     
     [SerializeField] protected float moveSpeed;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
 
     protected virtual void Awake()
     {
         moveSpeed = 2f;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public abstract void Move();
 
     protected virtual void FlipEnemy()
     {
-        transform.localScale = new Vector3(PlayerController.instance.transform.position.x < transform.position.x ? 1 : -1, 1, 1);
+        spriteRenderer.flipX = PlayerController.instance.transform.position.x > transform.position.x;
     }
 
 }

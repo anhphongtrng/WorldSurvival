@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamageReceiver : MonoBehaviour
 {
     [SerializeField] protected float maxHP = 5f;
     [SerializeField] protected float currentHP;
+    [SerializeField] protected Image hpBar;
 
     protected virtual void Start()
     {
@@ -13,6 +15,7 @@ public class DamageReceiver : MonoBehaviour
     public virtual void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        UpdateHPBar();
     }
 
     public virtual float GetCurrentHP()
@@ -30,16 +33,24 @@ public class DamageReceiver : MonoBehaviour
         currentHP = Mathf.Clamp(newHp, 0, maxHP);
     }
 
-    public virtual void HealHP(float amount)
+    public virtual void ChangeHP(float amount)
     {
         if (IsDead()) return;
 
         currentHP += amount;
-        currentHP = Mathf.Clamp(currentHP, -100, maxHP);
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 
     public virtual bool IsDead()
     {
         return currentHP <= 0;
+    }
+
+    public void UpdateHPBar()
+    {
+        if (hpBar != null)
+        {
+            hpBar.fillAmount = currentHP / maxHP;
+        }
     }
 }

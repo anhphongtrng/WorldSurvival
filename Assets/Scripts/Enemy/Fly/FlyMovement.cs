@@ -20,11 +20,7 @@ public class FlyMovement : EnemyMovement
     protected override void FlipEnemy()
     {
         float direction = target.position.x - transform.position.x;
-        transform.localScale = new Vector3(
-            direction < 0 ? 1 : -1,
-            1,
-            1
-        );
+        spriteRenderer.flipX = direction > 0;
     }
 
     public override void Move()

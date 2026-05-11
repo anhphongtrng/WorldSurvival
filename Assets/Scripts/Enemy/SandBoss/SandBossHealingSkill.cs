@@ -20,7 +20,7 @@ public class SandBossHealingSkill : EnemySkills
         float missingHP = sandBossController.damageReceiver.GetMaxHP() - sandBossController.damageReceiver.GetCurrentHP();
         float healAmount = missingHP * 0.3f;
         Debug.Log($"Healing for {healAmount} HP");
-        sandBossController.damageReceiver.HealHP(healAmount);
+        sandBossController.damageReceiver.ChangeHP(healAmount);
     }
 
     protected void Healing()

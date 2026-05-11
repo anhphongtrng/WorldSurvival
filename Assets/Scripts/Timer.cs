@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
     public int seconds;
     protected void Start()
     {
-        remaningTime = 10f;
+        remaningTime = 60f;
     }
 
     protected void Update()
