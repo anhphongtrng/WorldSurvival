@@ -16,9 +16,13 @@ public class FlySelfDestroy : SelfDestroy
 
     public override void DestroySelf()
     {
+        if(isDead) return;
+
         if (flyController.damageReceiver.IsDead())
         {
+            isDead = true;
             flyController.flyAnimation.SetDead(true);
+            EnemySpawner.instance.OnEnemiesKilled(gameObject);
             Destroy(gameObject, 1f);
         }
     }

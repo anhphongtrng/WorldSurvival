@@ -16,9 +16,13 @@ public class MummySelfDestroy : SelfDestroy
 
     public override void DestroySelf()
     {
+        if (isDead) return;
+
         if (mummyController.damageReceiver.IsDead())
         {
+            isDead = true;
             mummyController.mummyAnimation.SetDead(true);
+            EnemySpawner.instance.OnEnemiesKilled(gameObject);
             Destroy(gameObject, 1f);
         }
     }

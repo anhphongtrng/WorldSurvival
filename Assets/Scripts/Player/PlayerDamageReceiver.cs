@@ -10,6 +10,7 @@ public class PlayerDamageReceiver : DamageReceiver
 
     public override void TakeDamage(float dmg)
     {
+        base.TakeDamage(dmg);
         StatsController.instance.currentHealth -= dmg;
     }
 

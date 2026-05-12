@@ -6,6 +6,7 @@ public class DamageReceiver : MonoBehaviour
     [SerializeField] protected float maxHP = 5f;
     [SerializeField] protected float currentHP;
     [SerializeField] protected Image hpBar;
+    [SerializeField] protected GameObject bloodEffectPrefab;
 
     protected virtual void Start()
     {
@@ -16,6 +17,8 @@ public class DamageReceiver : MonoBehaviour
     {
         currentHP -= dmg;
         UpdateHPBar();
+        GameObject blood = Instantiate(bloodEffectPrefab, transform.position, Quaternion.identity);
+        Destroy(blood, 0.5f);
     }
 
     public virtual float GetCurrentHP()

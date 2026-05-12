@@ -201,6 +201,7 @@ MonoBehaviour:
   maxHP: 100
   currentHP: 0
   hpBar: {fileID: 555898691778078933}
+  bloodEffectPrefab: {fileID: 1623547084261108231, guid: 50021c78e518932488990cf81f9dfa27, type: 3}
 --- !u!114 &3099434432188071789
 MonoBehaviour:
   m_ObjectHideFlags: 0
