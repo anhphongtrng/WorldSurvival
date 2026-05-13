@@ -5,7 +5,7 @@ public class StatsController : MonoBehaviour
     public static StatsController instance;
 
     [Header("Combat Stats")]
-    public int beamWeaponDamage = 1;
+    public int beamWeaponDamage = 10;
     public int gunWeaponDamage = 2;
 
     [Header("Movement Stats")]
@@ -20,6 +20,7 @@ public class StatsController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

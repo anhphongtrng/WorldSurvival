@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] protected float remaningTime;
+    public static Timer instance;
+    [SerializeField] public float remaningTime;
     public int minutes;
     public int seconds;
+
+    protected void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
     protected void Start()
     {
         remaningTime = 60f;
@@ -38,6 +48,10 @@ public class Timer : MonoBehaviour
         if(IsOverTime())
         {
             Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 }

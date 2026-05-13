@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int maxEnemies = 30;
     [SerializeField] public int enemiesKilled = 0;
 
-    private List<GameObject> aliveEnemies = new();
+    public List<GameObject> aliveEnemies = new();
 
     private void Awake()
     {
@@ -22,6 +22,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        enemiesKilled = 0;
+        SpawnEnemyWhenStart();
         StartCoroutine(SpawnEnemyCoroutine());
     }
 
@@ -31,6 +33,14 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemy();
             yield return new WaitForSeconds(timeBetweenSpawns);
+        }
+    }
+
+    public void SpawnEnemyWhenStart()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            SpawnEnemy();
         }
     }
 
@@ -57,12 +67,19 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemy.transform.SetParent(transform);
 
         aliveEnemies.Add(spawnedEnemy);
+        Debug.Log($"Alive enemies: {aliveEnemies.Count}");
     }
 
     public void OnEnemiesKilled(GameObject enemy)
     {
         aliveEnemies.Remove(enemy);
         enemiesKilled++;
-        Debug.Log($"Enemies killed: {enemiesKilled}");
+    }
+
+    public void ResetSpawner()
+    {
+        enemiesKilled = 0;
+        SpawnEnemyWhenStart();
+        Debug.Log("Enemy Spawner Reset");
     }
 }

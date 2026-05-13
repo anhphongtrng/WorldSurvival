@@ -6,6 +6,12 @@ public class UIController : MonoBehaviour
     [SerializeField] protected Timer timer;
     [SerializeField] protected Canvas skillsCanvas;
     [SerializeField] protected TextMeshProUGUI bossProgressText;
+    [SerializeField] protected TextMeshProUGUI skillPointProgressText;
+
+    protected void Awake()
+    {
+        skillsCanvas = GameObject.Find("SkillsCanvas").GetComponent<Canvas>();
+    }
 
     protected void Start()
     {
@@ -17,6 +23,7 @@ public class UIController : MonoBehaviour
         SetTextTimer();
         SetSkillsCanvas();
         SetBossProgressText();
+        SetSkillPointProgressText();
     }
 
     public void SetTextTimer()
@@ -30,10 +37,35 @@ public class UIController : MonoBehaviour
         {
             skillsCanvas.enabled = true;
         }
+        else
+        {
+            skillsCanvas.enabled = false;
+        }
     }
 
     public void SetBossProgressText()
     {
-        bossProgressText.text = "Defeat enemies to summon Boss: " + EnemySpawner.instance.enemiesKilled + "/20";
+        int current = Mathf.Min(EnemySpawner.instance.enemiesKilled, 20);
+
+        bossProgressText.text =
+            "- Defeat enemies to summon Boss: " + current + "/20";
+
+        if (GameController.instance.isBossSpawned)
+        {
+            bossProgressText.text = "- Boss is summoned!";
+        }
+    }
+
+    public void SetSkillPointProgressText()
+    {
+        int current = Mathf.Min(EnemySpawner.instance.enemiesKilled, 10);
+
+        skillPointProgressText.text =
+            "- Defeat enemies to get Skill Point: " + EnemySpawner.instance.enemiesKilled % 10 + "/10";
+
+        if (EnemySpawner.instance.enemiesKilled % 10 == 0)
+        {
+            current = EnemySpawner.instance.enemiesKilled % 10;
+        }
     }
 }
