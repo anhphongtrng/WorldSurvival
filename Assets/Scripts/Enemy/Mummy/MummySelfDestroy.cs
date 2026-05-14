@@ -24,6 +24,7 @@ public class MummySelfDestroy : SelfDestroy
             mummyController.mummyAnimation.SetDead(true);
             EnemySpawner.instance.OnEnemiesKilled(gameObject);
             EnemySpawner.instance.aliveEnemies.Remove(gameObject);
+            DropItems();
             Destroy(gameObject, 1f);
         }
     }

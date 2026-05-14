@@ -70,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemy.transform.SetParent(transform);
 
         aliveEnemies.Add(spawnedEnemy);
-        Debug.Log($"Alive enemies: {aliveEnemies.Count}");
+        //Debug.Log($"Alive enemies: {aliveEnemies.Count}");
     }
 
     public void OnEnemiesKilled(GameObject enemy)

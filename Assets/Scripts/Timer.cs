@@ -3,7 +3,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     public static Timer instance;
-    [SerializeField] public float remaningTime;
+    public float remaningTime;
     public int minutes;
     public int seconds;
 
@@ -53,5 +53,10 @@ public class Timer : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+    }
+
+    public void AddTime(float amount)
+    {
+        remaningTime += amount;
     }
 }

@@ -413,7 +413,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2de7a076dc318d44816ae7a4daf42d9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::FlySelfDestroy
+  items:
+  - {fileID: 4858018656104256300, guid: 4fded09116065d14aacd70d11371472c, type: 3}
+  - {fileID: 7797433270735926403, guid: 172b9ee37f8eee8429a7f206c8375327, type: 3}
+  - {fileID: 2494401749266499168, guid: 1ea79867e4febb74d8909e62a8c91472, type: 3}
 --- !u!114 &8734025087265937714
 MonoBehaviour:
   m_ObjectHideFlags: 0
