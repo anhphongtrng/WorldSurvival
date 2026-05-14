@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float timeBetweenSpawns = 0.5f;
     [SerializeField] private int maxEnemies = 30;
-    [SerializeField] public int enemiesKilled = 0;
+    public int enemiesKilled = 0;
 
     public List<GameObject> aliveEnemies = new();
+
+    public static event Action<int> OnAddSkillPoint;
 
     private void Awake()
     {
@@ -53,11 +56,11 @@ public class EnemySpawner : MonoBehaviour
             return;
 
         GameObject enemyPrefab =
-            enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
 
         Vector3 spawnPosition = new(
-            Random.Range(-20f, 20f),
-            Random.Range(-20f, 20f),
+            UnityEngine.Random.Range(-20f, 20f),
+            UnityEngine.Random.Range(-20f, 20f),
             0
         );
 
@@ -74,6 +77,11 @@ public class EnemySpawner : MonoBehaviour
     {
         aliveEnemies.Remove(enemy);
         enemiesKilled++;
+
+        if (enemiesKilled % 10 == 0)
+        {
+            OnAddSkillPoint?.Invoke(1);
+        }
     }
 
     public void ResetSpawner()

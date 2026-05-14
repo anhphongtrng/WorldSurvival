@@ -26,12 +26,15 @@ public class SkillTreeController : MonoBehaviour
     {
         SkillSlot.OnAbilityPointSpent += HandleAbilityPointsSpent;
         SkillSlot.OnSkillMaxed += HandleSkillMaxed;
+        EnemySpawner.OnAddSkillPoint += AddAbilityPoint;
     }
 
     private void OnDisable()
     {
         SkillSlot.OnAbilityPointSpent -= HandleAbilityPointsSpent;
         SkillSlot.OnSkillMaxed -= HandleSkillMaxed;
+        EnemySpawner.OnAddSkillPoint -= AddAbilityPoint;
+
     }
 
     private void Start()
@@ -69,4 +72,8 @@ public class SkillTreeController : MonoBehaviour
         }
     }
 
+    public void AddAbilityPoint(int amount)
+    {
+        UpdateAbilityPoints(amount); // Increase available skill points by the specified amount
+    }
 }

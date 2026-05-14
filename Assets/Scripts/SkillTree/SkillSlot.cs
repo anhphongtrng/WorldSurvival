@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class SkillSlot : MonoBehaviour
 {
     [SerializeField] protected List<SkillSlot> prerequisiteSkills; // List of prerequisite skills that must be unlocked before this skill can be unlocked
-    [SerializeField] public SkillSO skillSO;
+    public SkillSO skillSO;
 
     public int currentLevel;
     public bool isUnlocked;

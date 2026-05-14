@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     [SerializeField] protected GameObject bossPrefab;
     [SerializeField] protected Transform bossSpawnPoint;
     [SerializeField] private int killsToSpawnBoss = 20;
-    [SerializeField] public bool isBossSpawned = false;
+    public bool isBossSpawned = false;
 
     private void Awake()
     {
