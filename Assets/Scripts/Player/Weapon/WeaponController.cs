@@ -13,7 +13,8 @@ public class WeaponController : MonoBehaviour
         gunObject = GameObject.Find("Gun");
         gunObject.SetActive(false);
         beamObject = GameObject.Find("Beam");
-        beamObject.SetActive(true);
+        currentWeapon = beamObject; 
+        currentWeapon.SetActive(true);
     }
 
     private void Update()

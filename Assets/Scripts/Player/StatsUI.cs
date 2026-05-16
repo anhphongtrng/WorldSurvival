@@ -17,26 +17,44 @@ public class StatsUI : MonoBehaviour
     {
         OpenStatsCanvas();
     }
-    public void UpdateBeamDamage()
+    public void UpdateBeamDamageUI()
     {
         statsSlot[0].GetComponentInChildren<TextMeshProUGUI>().text = "Beam Damage: " + StatsController.instance.beamWeaponDamage.ToString();
     }
 
-    public void UpdateGunDamage()
+    public void UpdateGunDamageUI()
     {
         statsSlot[1].GetComponentInChildren<TextMeshProUGUI>().text = "Gun Damage: " + StatsController.instance.gunWeaponDamage.ToString();
     }
 
-    public void UpdateMoveSpeed()
+    public void UpdateMoveSpeedUI()
     {
         statsSlot[2].GetComponentInChildren<TextMeshProUGUI>().text = "Move Speed: " + StatsController.instance.moveSpeed.ToString();
     }
 
+    public void UpdateHealItemRateUI()
+    {
+        statsSlot[3].GetComponentInChildren<TextMeshProUGUI>().text = "Heal Item Rate: " + StatsController.instance.healItemDropRate.ToString();
+    }
+
+    public void UpdateBeamDamageBuffItemRateUI()
+    {
+        statsSlot[4].GetComponentInChildren<TextMeshProUGUI>().text = "Beam DMG Buff Item Rate: " + StatsController.instance.beamDamageBuffItemDropRate.ToString();
+    }
+
+    public void UpdateBonusTimeItemRateUI()
+    {
+        statsSlot[5].GetComponentInChildren<TextMeshProUGUI>().text = "Bonus Time Item Rate: " + StatsController.instance.bonusTimeItemDropRate.ToString();
+    }
+
     public void UpdateAllStats()
     {
-        UpdateBeamDamage();
-        UpdateGunDamage();
-        UpdateMoveSpeed();
+        UpdateBeamDamageUI();
+        UpdateGunDamageUI();
+        UpdateMoveSpeedUI();
+        UpdateHealItemRateUI();
+        UpdateBeamDamageBuffItemRateUI();
+        UpdateBonusTimeItemRateUI();
     }
 
     public void OpenStatsCanvas()

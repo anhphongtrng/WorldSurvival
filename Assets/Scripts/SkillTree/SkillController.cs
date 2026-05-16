@@ -27,6 +27,15 @@ public class SkillController : MonoBehaviour
             case "Speed Boost":
                 StatsController.instance.UpdateMoveSpeed(1f);
                 break;
+            case "Heal Item Drop Rate Boost":
+                StatsController.instance.UpdateHealItemDropRate(0.01f);
+                break;
+            case "Beam Damage Buff Item Drop Rate Boost":
+                StatsController.instance.UpdateBeamDamageBuffItemDropRate(0.01f);
+                break;
+            case "Bonus Time Item Drop Rate Boost":
+                StatsController.instance.UpdateBonusTimeItemDropRate(0.01f);
+                break;
         }
     }
 }

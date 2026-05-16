@@ -20,10 +20,10 @@ public class StatsController : MonoBehaviour
     public Vector3 originalScale; 
     public Transform playerVisuals;
 
-    [Header("DropItemsRate")]
-    public float healItemDropRate = 1f;
-    public float beamDamageBuffItemDropRate = 0.1f;
-    public float bonusTimeItemDropRate = 0.1f;
+    [Header("Drop Items Rate")]
+    public float healItemDropRate = 0.01f;
+    public float beamDamageBuffItemDropRate = 0.01f;
+    public float bonusTimeItemDropRate = 0.01f;
 
     private Coroutine beamBuffCoroutine;
     
@@ -109,4 +109,21 @@ public class StatsController : MonoBehaviour
     {
         moveSpeed += amount;
     }
+
+    // UPDATE ITEMS RATE
+    public void UpdateHealItemDropRate(float amount)
+    {
+        healItemDropRate += amount;
+    }
+
+    public void UpdateBeamDamageBuffItemDropRate(float amount)
+    {
+        beamDamageBuffItemDropRate += amount;
+    }
+
+    public void UpdateBonusTimeItemDropRate(float amount)
+    {
+        bonusTimeItemDropRate += amount;
+    }
+
 }
