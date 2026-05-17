@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class WaterSkill : MonoBehaviour
+public class DustSkill : MonoBehaviour
 {
     [SerializeField] private float lifeTime = 1f;
 
@@ -12,7 +11,7 @@ public class WaterSkill : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == null) return;
+        if (collision == null) return;
         if (collision.CompareTag("Enemy"))
         {
             DamageReceiver damageReceiver = collision.gameObject.GetComponent<DamageReceiver>();

@@ -4,18 +4,18 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI textTimer;
     [SerializeField] protected Timer timer;
-    [SerializeField] protected Canvas skillsCanvas;
+    [SerializeField] protected Canvas talentsCanvas;
     [SerializeField] protected TextMeshProUGUI bossProgressText;
     [SerializeField] protected TextMeshProUGUI skillPointProgressText;
 
     protected void Awake()
     {
-        skillsCanvas = GameObject.Find("SkillsCanvas").GetComponent<Canvas>();
+        talentsCanvas = GameObject.Find("TalentsCanvas").GetComponent<Canvas>();    
     }
 
     protected void Start()
     {
-        skillsCanvas.enabled = false;
+        talentsCanvas.enabled = false;
     }
 
     protected void Update()
@@ -35,11 +35,11 @@ public class UIController : MonoBehaviour
     {
         if (timer.IsOverTime())
         {
-            skillsCanvas.enabled = true;
+            talentsCanvas.enabled = true;
         }
         else
         {
-            skillsCanvas.enabled = false;
+            talentsCanvas.enabled = false;
         }
     }
 

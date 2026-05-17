@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
 
     protected void Start()
     {
-        remaningTime = 60f;
+        remaningTime = 30f;
     }
 
     protected void Update()

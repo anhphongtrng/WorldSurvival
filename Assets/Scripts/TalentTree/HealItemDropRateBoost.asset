@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f96e0f0e976e8644928565a0d0db527, type: 3}
-  m_Name: BeamDamageBuffItemDropRateBoost
+  m_Name: HealItemDropRateBoost
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
-  skillName: Beam Damage Buff Item Drop Rate Boost
+  skillName: Heal Item Drop Rate Boost
   maxLevel: 5
-  skillIcon: {fileID: 6146745670733231223, guid: d79d3049a09e7e4429fd9335291c0da6, type: 3}
+  description: Add 1% Drop Rate
+  skillIcon: {fileID: 2690274267995810836, guid: 86dcbe28185901547a2553d964a6fae7, type: 3}
+  cooldown: 0

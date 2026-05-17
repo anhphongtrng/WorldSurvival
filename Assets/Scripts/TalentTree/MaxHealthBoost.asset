@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f96e0f0e976e8644928565a0d0db527, type: 3}
-  m_Name: BonusTimeItemDropRateBoost
+  m_Name: MaxHealthBoost
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
-  skillName: Bonus Time Item Drop Rate Boost
+  skillName: Max Health Boost
   maxLevel: 5
-  skillIcon: {fileID: -5373949792807698244, guid: 2e8ab1a9aa30776479e2aa978ce96023, type: 3}
+  description: Add 1 to Max Health
+  skillIcon: {fileID: -5233972180137678507, guid: b450f5e36fa745e48b95ccef7cc0456d, type: 3}
+  cooldown: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkillController : MonoBehaviour
+public class TalentController : MonoBehaviour
 {
     protected void OnEnable()
     {

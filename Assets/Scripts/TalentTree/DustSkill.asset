@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f96e0f0e976e8644928565a0d0db527, type: 3}
-  m_Name: SpeedBoost
+  m_Name: DustSkill
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
-  skillName: Speed Boost
-  maxLevel: 4
-  skillIcon: {fileID: -3040697513973818278, guid: d79d3049a09e7e4429fd9335291c0da6, type: 3}
+  skillName: Dust Skill
+  maxLevel: 1
+  skillIcon: {fileID: 1915886111900610273, guid: 449f7df3a4cf211488c5e6828273c307, type: 3}
