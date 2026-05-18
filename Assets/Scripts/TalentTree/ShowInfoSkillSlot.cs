@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SkillSlotButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ShowInfoSkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField] protected SkillSlot skillSlot;

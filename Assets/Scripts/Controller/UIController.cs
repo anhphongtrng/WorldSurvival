@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour
     protected void Update()
     {
         SetTextTimer();
-        SetSkillsCanvas();
+        SetTalentsCanvas();
         SetBossProgressText();
         SetSkillPointProgressText();
     }
@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
         textTimer.text = string.Format("{0:00}:{1:00}", timer.minutes, timer.seconds);
     }
 
-    public void SetSkillsCanvas()
+    public void SetTalentsCanvas()
     {
         if (timer.IsOverTime())
         {

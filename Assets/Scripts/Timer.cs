@@ -47,11 +47,11 @@ public class Timer : MonoBehaviour
     {
         if(IsOverTime())
         {
-            Time.timeScale = 0f;
+            GamePauseController.instance.SetOverTimePause(true);
         }
         else
         {
-            Time.timeScale = 1f;
+            GamePauseController.instance.SetOverTimePause(false);
         }
     }
 
