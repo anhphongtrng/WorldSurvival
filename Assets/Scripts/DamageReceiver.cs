@@ -15,6 +15,7 @@ public class DamageReceiver : MonoBehaviour
 
     public virtual void TakeDamage(float dmg)
     {
+        if (GamePauseController.instance.isPaused) return;
         currentHP -= dmg;
         UpdateHPBar();
         GameObject blood = Instantiate(bloodEffectPrefab, transform.position, Quaternion.identity);
