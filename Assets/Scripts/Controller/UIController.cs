@@ -2,20 +2,33 @@ using UnityEngine;
 using TMPro;
 public class UIController : MonoBehaviour
 {
+    public static UIController instance;
     [SerializeField] protected TextMeshProUGUI textTimer;
     [SerializeField] protected Timer timer;
     [SerializeField] protected Canvas talentsCanvas;
     [SerializeField] protected TextMeshProUGUI bossProgressText;
     [SerializeField] protected TextMeshProUGUI skillPointProgressText;
+    [SerializeField] protected GameObject gamePauseMenu;
+    [SerializeField] protected GameObject gameOverMenu;
 
     protected void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         talentsCanvas = GameObject.Find("TalentsCanvas").GetComponent<Canvas>();    
     }
 
     protected void Start()
     {
         talentsCanvas.enabled = false;
+        ShowGameOverMenu(false);
+        ShowGamePauseMenu(false);
     }
 
     protected void Update()
@@ -67,5 +80,15 @@ public class UIController : MonoBehaviour
         {
             current = EnemySpawner.instance.enemiesKilled % 10;
         }
+    }
+
+    public void ShowGameOverMenu(bool value)
+    {
+        gameOverMenu.SetActive(value);
+    }
+
+    public void ShowGamePauseMenu(bool value)
+    {
+        gamePauseMenu.SetActive(value);
     }
 }

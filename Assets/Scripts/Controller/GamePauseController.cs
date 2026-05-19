@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GamePauseController : MonoBehaviour
 {
@@ -39,8 +40,25 @@ public class GamePauseController : MonoBehaviour
         isMenuPaused = value;
     }
 
+    public void PressToPause()
+    {
+        if(Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            isMenuPaused = !isMenuPaused;
+            if(isMenuPaused)
+            {
+                UIController.instance.ShowGamePauseMenu(true);
+            }
+            else
+            {
+                UIController.instance.ShowGamePauseMenu(false);
+            }
+        }
+    }
+
     private void UpdatePauseState()
     {
+        PressToPause();
         if (isOverTimePaused || isGameOverPaused || isStatPaused || isMenuPaused)
             Time.timeScale = 0f;
         else

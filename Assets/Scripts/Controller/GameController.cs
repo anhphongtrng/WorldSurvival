@@ -52,4 +52,22 @@ public class GameController : MonoBehaviour
         isBossSpawned = false;
         Debug.Log("Next Stage Loaded");
     }
+
+    public void OnPlayerDead()
+    {
+        EndGame();
+    }
+
+    public void EndGame()
+    {
+        GamePauseController.instance.SetGameOverPause(true);
+        UIController.instance.ShowGameOverMenu(true);
+        Debug.Log("Game Over");
+    }
+
+    public void RestartGame()
+    {
+        SceneLoader.instance.LoadNextScene(SceneManager.GetActiveScene().name);
+        UIController.instance.ShowGameOverMenu(false);
+    }
 }

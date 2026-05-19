@@ -5,9 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static SceneLoader instance;
     [SerializeField] protected Animator animator;
     [SerializeField] protected float transitionTime = 1f;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void LoadNextScene(string sceneName)
     {

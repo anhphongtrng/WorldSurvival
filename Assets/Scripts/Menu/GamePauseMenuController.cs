@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseGameMenuController : MonoBehaviour
+public class GamePauseMenuController : MonoBehaviour
 {
     [SerializeField] protected GameObject gamePauseMenu;
     [SerializeField] protected SceneLoader sceneLoader;
@@ -11,19 +11,18 @@ public class PauseGameMenuController : MonoBehaviour
     private void Start()
     {
         isPaused = false;
-        gamePauseMenu.SetActive(isPaused);
     }
 
     public void PauseGame()
     {
-        gamePauseMenu.SetActive(true);
+        UIController.instance.ShowGamePauseMenu(isPaused);
         GamePauseController.instance.SetMenuPause(true);
         isPaused = true;
     }
 
     public void ContinueGame()
     {
-        gamePauseMenu.SetActive(false);
+        UIController.instance.ShowGamePauseMenu(isPaused);
         GamePauseController.instance.SetMenuPause(false);
         isPaused = false;
     }
@@ -32,7 +31,6 @@ public class PauseGameMenuController : MonoBehaviour
     {
         Debug.Log("Quit Gamessss");
         sceneLoader.LoadNextScene("MainMenu");
-        //SceneManager.LoadScene("MainMenu");
     }
 
     public void OpenOption()

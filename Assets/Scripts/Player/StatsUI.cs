@@ -4,22 +4,9 @@ using UnityEngine.InputSystem;
 
 public class StatsUI : MonoBehaviour
 {
-    public static StatsUI instance;
     [SerializeField] protected GameObject[] statsSlot;
     public bool isCanvasOpen = false;
     [SerializeField] protected Canvas statsCanvas;
-
-    protected void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     protected void Start()
     {
