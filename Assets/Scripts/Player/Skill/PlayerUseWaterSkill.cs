@@ -44,9 +44,6 @@ public class PlayerUseWaterSkill : PlayerSkill
             Quaternion.identity
         );
 
-        Debug.Log("Cast skill at: " + currentPreview.transform.position);
-        Debug.Log("Spawned skill position: " + skill.transform.position);
-
         Destroy(currentPreview);
 
         isAiming = false;

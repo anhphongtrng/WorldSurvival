@@ -8499,10 +8499,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ae4ae01976ed24b8eff1963da36832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  bossPrefab: {fileID: 4051913371139123527, guid: cb28a0eedba0e00439f90108a71e32f0, type: 3}
-  bossSpawnPoint: {fileID: 0}
+  miniBossPrefab: {fileID: 4051913371139123527, guid: cb28a0eedba0e00439f90108a71e32f0, type: 3}
+  finalBossPrefab: {fileID: 1393753636566728474, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
   killsToSpawnBoss: 20
+  miniBossesNeeded: 3
   isBossSpawned: 0
+  currentBossPhase: 0
 --- !u!1 &1025823392
 GameObject:
   m_ObjectHideFlags: 0
@@ -42316,7 +42318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e53c46aa671e74bbee587cf255bac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  remaningTime: 5
+  remaningTime: 60
   minutes: 0
   seconds: 0
 --- !u!224 &1499242999 stripped
@@ -47944,6 +47946,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55add669969520f4aa079d940e11bb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillSlot
+--- !u!1001 &722129859295736565
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1393753636566728474, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_Name
+      value: SkeletonBossGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393753636566728474, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285220830366831291, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889854227758789150, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71db29bdf9384c843a95dfcd1e0673c8, type: 3}
 --- !u!1001 &2004262470128202122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48155,6 +48222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyEnemyGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 6484362517867199908, guid: 20c15b52807f46a4a918a98b8aa49035, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48331,6 +48402,7 @@ SceneRoots:
   - {fileID: 735907826}
   - {fileID: 138117116}
   - {fileID: 2070139020}
+  - {fileID: 722129859295736565}
   - {fileID: 5770209986996528259}
   - {fileID: 2577300665226443844}
   - {fileID: 4381417418335965473}
