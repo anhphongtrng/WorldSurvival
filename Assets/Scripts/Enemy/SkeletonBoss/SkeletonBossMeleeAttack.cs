@@ -1,49 +1,55 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class SkeletonBossMeleeAttack : EnemySkills
+public class SkeletonBossMeleeAttack : EnemySkill
 {
-    protected SkeletonBossController skeletonBossController;
+    [Header("Components")]
+    [SerializeField] protected SkeletonBossAnimation skeletonBossAnimation;
+    
+    [Header("Distance")]
+    [SerializeField] protected float attackRange = 2f;
+    
+    [Header("Timing")]
+    [SerializeField] protected float attackDelay = 0.4f;
+    [SerializeField] protected float animationEndDelay = 0.3f;
 
     protected override void Awake()
     {
         base.Awake();
-        skeletonBossController = GetComponent<SkeletonBossController>();
+
+        skeletonBossAnimation = GetComponent<SkeletonBossAnimation>();
     }
 
-    protected override void Update()
+    private void Start()
     {
-        MeleeAttack();
+        stopMovementWhenUseSkill = true;
+        cooldown = 3f;
     }
 
-    protected override void OnSkill()
+    public override bool CanUse()
     {
-        Debug.Log("Skeleton Boss sử dụng kỹ năng đánh thường!");
-        skeletonBossController.skeletonBossAnimation.TriggerAttack2();
+        if (!base.CanUse())
+            return false;
+
+        float distance =
+            Vector2.Distance(
+                transform.position,
+                brain.target.position
+            );
+
+        return distance <= attackRange;
     }
 
-    protected void MeleeAttack()
+    public override IEnumerator Execute()
     {
-        float distanceToPlayer = Vector3.Distance(
-            transform.position,
-            PlayerController.instance.transform.position
-        );
+        StartCoroutine(StartCooldown());
 
-        // Player quá xa
-        if (distanceToPlayer >= 10f || distanceToPlayer == 0f)
-        {
-            skeletonBossController.skeletonBossAnimation.SetWalking(false);
-        }
+        skeletonBossAnimation.TriggerAttack2();
 
-        // Chạy tăng tốc để tiếp cận
-        else if (distanceToPlayer < 10f && distanceToPlayer > 3f)
-        {
-            skeletonBossController.skeletonBossAnimation.SetWalking(true);
-        }
+        yield return new WaitForSeconds(attackDelay);
 
-        // Đủ gần để đánh
-        else if (distanceToPlayer <= 3f)
-        {
-            UseSkill();
-        }
+        Debug.Log("Melee Damage");
+
+        yield return new WaitForSeconds(animationEndDelay);
     }
 }

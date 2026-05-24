@@ -33,6 +33,37 @@ Transform:
   - {fileID: 5896460125840681600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2871324568359487512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8024305907957038417}
+  m_Layer: 3
+  m_Name: ThrowAxePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8024305907957038417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871324568359487512}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.39, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6094414977678033511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4042401370681406603
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +231,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7004785972284447205, guid: ac4318888d7476843887c9546b0855be, type: 3}
       insertIndex: 0
       addedObject: {fileID: 3498154398194797968}
+    - targetCorrespondingSourceObject: {fileID: 7004785972284447205, guid: ac4318888d7476843887c9546b0855be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8024305907957038417}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8213974656607846790, guid: ac4318888d7476843887c9546b0855be, type: 3}
       insertIndex: 1
@@ -225,6 +259,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8213974656607846790, guid: ac4318888d7476843887c9546b0855be, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8158624484970427979}
+    - targetCorrespondingSourceObject: {fileID: 8213974656607846790, guid: ac4318888d7476843887c9546b0855be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6072739111263595501}
+    - targetCorrespondingSourceObject: {fileID: 8213974656607846790, guid: ac4318888d7476843887c9546b0855be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 178456677922288603}
+    - targetCorrespondingSourceObject: {fileID: 8213974656607846790, guid: ac4318888d7476843887c9546b0855be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5682844439683083613}
+    - targetCorrespondingSourceObject: {fileID: 8213974656607846790, guid: ac4318888d7476843887c9546b0855be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9204918523128762599}
   m_SourcePrefab: {fileID: 100100000, guid: ac4318888d7476843887c9546b0855be, type: 3}
 --- !u!1 &4925724084913478148 stripped
 GameObject:
@@ -302,8 +348,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1530cdb8c162b7c46b67d65c1a5900b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 0
-  spriteRenderer: {fileID: 0}
+  moveSpeedd: 2
+  isWalking: 1
+  isBoosting: 0
 --- !u!114 &3887085023312397586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,8 +478,109 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19b7534e04dbee34d9feea2ff490aef2, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkeletonBossMeleeAttack
+  skillName: Melee Attack
+  weight: 10
+  cooldown: 0
+  recoveryTime: 1
+  stopMovementWhenUseSkill: 0
+  enemyAnimation: {fileID: 0}
+  attackRange: 2
+  attackDelay: 0.4
+  animationEndDelay: 0.3
+--- !u!114 &6072739111263595501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925724084913478148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281055007e527834c9c9be35b53adbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBrain
+  target: {fileID: 0}
+  currentState: 0
+  chaseRange: 10
+  thinkDelayRange: {x: 2.5, y: 3.5}
+  movement: {fileID: 0}
+  anim: {fileID: 0}
+  skills:
+  - {fileID: 8158624484970427979}
+  - {fileID: 178456677922288603}
+  - {fileID: 5682844439683083613}
+  - {fileID: 9204918523128762599}
+--- !u!114 &178456677922288603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925724084913478148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62684f6d5efecca45acf4a06a8733eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkeletonBossBoostSpeed
+  skillName: Speed Boost
+  weight: 10
+  cooldown: 0
+  recoveryTime: 1
+  stopMovementWhenUseSkill: 0
+  enemyAnimation: {fileID: 0}
+  movement: {fileID: 0}
+  minDistance: 4
+  maxDistance: 8
+  speedMultiplier: 2
+  boostDuration: 3
+--- !u!114 &5682844439683083613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925724084913478148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef7f1f429e23c141b1a5eb95fedfb17, type: 3}
+  m_Name: 
   m_EditorClassIdentifier: '::'
-  skillCooldown: 0
+  skillName: Throw Axe
+  weight: 10
+  cooldown: 0
+  recoveryTime: 1
+  stopMovementWhenUseSkill: 0
+  enemyAnimation: {fileID: 0}
+  axePrefab: {fileID: 978572384683829625, guid: d8dc8f9150252be42b84fe9c3a76dba8, type: 3}
+  minDistance: 3
+  maxDistance: 8
+  throwDelay: 0.5
+  throwPoint: {fileID: 8024305907957038417}
+--- !u!114 &9204918523128762599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925724084913478148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd02de6a5cd3f5440aaa29bded343245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  skillName: Circle Axe
+  weight: 10
+  cooldown: 0
+  recoveryTime: 1
+  stopMovementWhenUseSkill: 0
+  skeletonBossAnimation: {fileID: 0}
+  axePrefab: {fileID: 978572384683829625, guid: d8dc8f9150252be42b84fe9c3a76dba8, type: 3}
+  activeRange: 7
+  radius: 4
+  throughDelay: 0.5
+  skillDuration: 4
+  throwPoint: {fileID: 8024305907957038417}
 --- !u!4 &6094414977678033511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7004785972284447205, guid: ac4318888d7476843887c9546b0855be, type: 3}

@@ -25,7 +25,7 @@ public class MummySelfDestroy : SelfDestroy
             EnemySpawner.instance.OnEnemiesKilled(gameObject);
             EnemySpawner.instance.aliveEnemies.Remove(gameObject);
             DropItems();
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.5f);
         }
     }
 }

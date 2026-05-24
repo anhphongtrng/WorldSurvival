@@ -1,22 +1,61 @@
 using UnityEngine;
 
-public class SkeletonBossMovement : EnemyMovement
+public class SkeletonBossMovement : MonoBehaviour
 {
-    protected SkeletonBossController skeletonBossController;
-    protected bool isFacingRight = true;
-    protected override void Awake()
+    [SerializeField] private float moveSpeedd = 2f;
+
+    private float defaultSpeed;
+    private bool isFacingRight = true;
+    public bool isWalking = true;
+    public bool isBoosting = false;
+
+    private Rigidbody2D rb;
+
+    private EnemyBrain brain;
+
+    private SkeletonBossAnimation skeletonBossAnimation;
+
+    protected void Awake()
     {
-        base.Awake();
-        moveSpeed = 2f;
-        skeletonBossController = GetComponent<SkeletonBossController>();
+        rb = GetComponent<Rigidbody2D>();
+
+        brain = GetComponent<EnemyBrain>();
+
+        skeletonBossAnimation = GetComponent<SkeletonBossAnimation>();
+
+        defaultSpeed = moveSpeedd;
     }
 
-    void Update()
+    public void MoveToTarget()
     {
-        Move();
+        if (brain.target == null)
+            return;
+
+        transform.position = Vector3.MoveTowards(transform.position, PlayerController.instance.transform.position, moveSpeedd * Time.deltaTime);
+
+        skeletonBossAnimation.SetWalking(true);
+        skeletonBossAnimation.SetSpeedBoosting(isBoosting);
+        FlipEnemy();
     }
 
-    protected override void FlipEnemy()
+    public void StopMove()
+    {
+        rb.linearVelocity = Vector2.zero;
+
+        skeletonBossAnimation.SetWalking(false);
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        moveSpeedd = defaultSpeed * multiplier;
+    }
+
+    public void ResetSpeed()
+    {
+        moveSpeedd = defaultSpeed;
+    }
+
+    protected void FlipEnemy()
     {
         if (PlayerController.instance.transform.position.x > transform.position.x && !isFacingRight)
         {
@@ -34,17 +73,17 @@ public class SkeletonBossMovement : EnemyMovement
         }
     }
 
-    public override void Move()
+    public void Move()
     {
         if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < 10f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, PlayerController.instance.transform.position, moveSpeed * Time.deltaTime);
-            skeletonBossController.skeletonBossAnimation.SetWalking(true);
+            transform.position = Vector3.MoveTowards(transform.position, PlayerController.instance.transform.position, moveSpeedd * Time.deltaTime);
+            skeletonBossAnimation.SetWalking(true);
             FlipEnemy();
         }
         else
         {
-            skeletonBossController.skeletonBossAnimation.SetWalking(false);
+            skeletonBossAnimation.SetWalking(false);
         }
     }
 }

@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
 
     private int miniBossesKilled = 0;
 
+    [Header("Stage Progress")] [SerializeField]
     public bool isBossSpawned = false;
     private bool isFinalBossUnlocked = false;
     private bool isStageComplete = false;
@@ -55,22 +56,15 @@ public class GameController : MonoBehaviour
         if (isBossSpawned) return;
         if (isStageComplete) return;
 
-        // Nếu đã unlock final boss
-        // thì spawn final boss luôn
         if (isFinalBossUnlocked)
         {
-            Debug.Log("abc " + isFinalBossUnlocked);
             SpawnBoss();
             isBossSpawned = true;
             return;
         }
 
-        // Chưa unlock final boss
-        // thì phải đủ điều kiện mới spawn miniboss
-        if (EnemySpawner.instance.enemiesKilled >= killsToSpawnBoss
-            || Timer.instance.remaningTime <= 20)
+        if (EnemySpawner.instance.enemiesKilled >= killsToSpawnBoss || Timer.instance.remaningTime <= 20)
         {
-            Debug.Log("Spawning Boss...");
             SpawnBoss();
             isBossSpawned = true;
         }
@@ -87,26 +81,14 @@ public class GameController : MonoBehaviour
         {
             case BossPhase.MiniBoss:
 
-                Instantiate(
-                    miniBossPrefab,
-                    spawnPosition,
-                    Quaternion.identity
-                );
-
+                Instantiate(miniBossPrefab, spawnPosition, Quaternion.identity);
                 Debug.Log("Mini Boss Spawned");
-
                 break;
 
             case BossPhase.FinalBoss:
 
-                Instantiate(
-                    finalBossPrefab,
-                    spawnPosition,
-                    Quaternion.identity
-                );
-
+                Instantiate(finalBossPrefab, spawnPosition, Quaternion.identity);
                 Debug.Log("Final Boss Spawned");
-
                 break;
         }
     }
@@ -121,20 +103,12 @@ public class GameController : MonoBehaviour
 
         isBossSpawned = false;
 
-        Debug.Log(
-            "Mini Boss Killed: "
-            + miniBossesKilled
-            + "/"
-            + miniBossesNeeded
-        );
-
-        // Chưa đủ 3 miniboss
+        Debug.Log("Mini Boss Killed: " + miniBossesKilled + "/" + miniBossesNeeded);
         if (miniBossesKilled < miniBossesNeeded)
         {
             EndStageForUpgrade();
         }
 
-        // Đủ 3 miniboss
         else
         {
             UnlockFinalBoss();
@@ -160,7 +134,6 @@ public class GameController : MonoBehaviour
     public void OnFinalBossDead()
     {
         Debug.Log("FINAL BOSS DEFEATED!");
-
         LoadNextStage();
     }
 

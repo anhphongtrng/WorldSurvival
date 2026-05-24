@@ -25,7 +25,7 @@ public class FlySelfDestroy : SelfDestroy
             EnemySpawner.instance.OnEnemiesKilled(gameObject);
             EnemySpawner.instance.aliveEnemies.Remove(gameObject);
             DropItems();
-            Destroy(transform.parent.gameObject, 1f);   
+            Destroy(transform.parent.gameObject, 0.5f);   
         }
     }
 }

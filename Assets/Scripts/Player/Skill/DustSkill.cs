@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class DustSkill : MonoBehaviour
 {
-    [SerializeField] private float lifeTime = 1f;
+    //[SerializeField] private float lifeTime = 1f;
 
-    void Start()
-    {
-        Destroy(gameObject, lifeTime);
-    }
+    //void Start()
+    //{
+    //    Destroy(gameObject, lifeTime);
+    //}
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
