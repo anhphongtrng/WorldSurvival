@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI skillPointProgressText;
     [SerializeField] protected GameObject gamePauseMenu;
     [SerializeField] protected GameObject gameOverMenu;
+    [SerializeField] protected GameObject stageGuidePanel;
+    [SerializeField] protected GameObject stageResultPanel;
 
     protected void Awake()
     {
@@ -29,14 +31,16 @@ public class UIController : MonoBehaviour
         talentsCanvas.enabled = false;
         ShowGameOverMenu(false);
         ShowGamePauseMenu(false);
+        SetStageGuidePanel(true);
+        SetStageResultPanel(false);
     }
 
     protected void Update()
     {
         SetTextTimer();
-        SetTalentsCanvas();
         SetBossProgressText();
         SetSkillPointProgressText();
+        ShowStageResultPanel();
     }
 
     public void SetTextTimer()
@@ -44,16 +48,9 @@ public class UIController : MonoBehaviour
         textTimer.text = string.Format("{0:00}:{1:00}", timer.minutes, timer.seconds);
     }
 
-    public void SetTalentsCanvas()
+    public void SetTalentsCanvas(bool value)
     {
-        if (timer.IsOverTime())
-        {
-            talentsCanvas.enabled = true;
-        }
-        else
-        {
-            talentsCanvas.enabled = false;
-        }
+        talentsCanvas.enabled = value;
     }
 
     public void SetBossProgressText()
@@ -90,5 +87,27 @@ public class UIController : MonoBehaviour
     public void ShowGamePauseMenu(bool value)
     {
         gamePauseMenu.SetActive(value);
+    }
+
+    public void SetStageGuidePanel(bool value)
+    {
+        stageGuidePanel.SetActive(value);
+    }
+
+    public void SetStageResultPanel(bool value)
+    {
+        stageResultPanel.SetActive(value);
+    }
+    
+    public void ShowStageResultPanel()
+    {
+        if (timer.IsOverTime() && talentsCanvas.enabled == false)
+        {
+            stageResultPanel.SetActive(true);
+        }
+        else
+        {
+            stageResultPanel.SetActive(false);
+        }
     }
 }

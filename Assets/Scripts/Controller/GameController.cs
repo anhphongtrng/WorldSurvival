@@ -15,7 +15,8 @@ public class GameController : MonoBehaviour
     [Header("Mini Boss Progress")]
     [SerializeField] private int miniBossesNeeded = 3;
 
-    private int miniBossesKilled = 0;
+    public int miniBossesKilled = 0;
+    public int worldLevel = 1;
 
     [Header("Stage Progress")] [SerializeField]
     public bool isBossSpawned = false;
@@ -154,10 +155,10 @@ public class GameController : MonoBehaviour
         Timer.instance.remaningTime = 60f;
         Destroy(GameObject.Find("SandBossEnemy(Clone)"));
         Destroy(GameObject.Find("SkeletonBossGroup(Clone)"));
+        UIController.instance.SetTalentsCanvas(false);
         isBossSpawned = false;
         isStageComplete = false;
-        Debug.Log("Next Stage Loaded"); 
-        Debug.Log(EnemySpawner.instance.enemiesKilled);
+        worldLevel++;
     }
 
     public void OnPlayerDead()

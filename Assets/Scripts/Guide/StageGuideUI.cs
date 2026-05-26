@@ -50,7 +50,7 @@ public class StageGuideUI : MonoBehaviour
 
     public void CloseGuide()
     {
-        gameObject.SetActive(false);
+        UIController.instance.SetStageGuidePanel(false);
         GamePauseController.instance.SetGuidePause(false);
     }
 }
