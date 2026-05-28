@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
@@ -18,10 +19,11 @@ public class GameController : MonoBehaviour
     public int miniBossesKilled = 0;
     public int worldLevel = 1;
 
-    [Header("Stage Progress")] [SerializeField]
+    [Header("Stage Progress")]
     public bool isBossSpawned = false;
     private bool isFinalBossUnlocked = false;
     private bool isStageComplete = false;
+    protected float delayBeforeEndGame = 1f;
 
     public BossPhase currentBossPhase = BossPhase.MiniBoss;
 
@@ -132,10 +134,13 @@ public class GameController : MonoBehaviour
     // FINAL BOSS DEAD
     // =========================
 
-    public void OnFinalBossDead()
+    public IEnumerator OnFinalBossDeadOrWinGame(GameObject finalBoss)
     {
         Debug.Log("FINAL BOSS DEFEATED!");
-        LoadNextStage();
+        yield return new WaitForSeconds(delayBeforeEndGame);
+        GamePauseController.instance.SetEndGamePause(true);
+        UIController.instance.ShowGameCompleteMenu(true);
+        Destroy(finalBoss);
     }
 
     // =========================
@@ -163,10 +168,10 @@ public class GameController : MonoBehaviour
 
     public void OnPlayerDead()
     {
-        EndGame();
+        GameOver();
     }
 
-    public void EndGame()
+    public void GameOver()
     {
         GamePauseController.instance.SetGameOverPause(true);
         UIController.instance.ShowGameOverMenu(true);

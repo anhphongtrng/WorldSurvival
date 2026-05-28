@@ -33,8 +33,9 @@ public class SkeletonBossAnimation : MonoBehaviour
         animator.SetTrigger("isSpeedBoost");
     }
 
-    public void SetDead(bool isDead)
+    public void TriggerDeath()
     {
-        animator.SetBool("isDead", isDead);
+        animator.SetTrigger("isDead 0");
     }
+
 }

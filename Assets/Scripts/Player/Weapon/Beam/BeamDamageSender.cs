@@ -1,32 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BeamDamageSender : DamageSender
 {
     [Header("Attack")]
-    [SerializeField] protected float range = 5f;
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected Transform firePos;
 
     [Header("Line")]
-    [SerializeField] 
-    protected LineController linePrefab;
-    protected LineController currentLine;
-    protected Transform currentTarget;
+    [SerializeField] protected LineController linePrefab;
+    [SerializeField] protected List<LineController> currentLines = new();
+    [SerializeField] protected List<Transform> currentTargets = new();
 
     protected override void Awake()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
     }
 
-    void Update()
+    private void Update()
     {
         FindNearestTarget();
 
-        if (currentTarget == null)
+        if (currentTargets.Count == 0)
         {
-            if (currentLine != null)
-                currentLine.Hide();
-
+            HideAllLine();
             return;
         }
 
@@ -34,42 +31,68 @@ public class BeamDamageSender : DamageSender
         AttackTarget();
     }
 
-    void SpawnLine()
+    public void SpawnLine()
     {
-        if (currentLine != null) return;
-
-        currentLine = Instantiate(linePrefab);
-        currentLine.transform.SetParent(transform);
-    }
-
-    void FindNearestTarget()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
-
-        float minDist = Mathf.Infinity;
-        Transform nearest = null;
-
-        foreach (Collider2D hit in hits)
+        // tao them line neu chua du
+        while (currentLines.Count < currentTargets.Count)
         {
-            float dist = Vector2.Distance(transform.position, hit.transform.position);
-
-            if (dist < minDist)
-            {
-                minDist = dist;
-                nearest = hit.transform;
-            }
+            LineController line = Instantiate(linePrefab, transform);
+            currentLines.Add(line);
         }
 
-        currentTarget = nearest;
+        // hide line du thua
+        for (int i = currentTargets.Count; i < currentLines.Count; i++)
+        {
+            currentLines[i].Hide();
+        }
     }
 
-    void AttackTarget()
+    public void FindNearestTarget()
     {
-        currentLine.Draw(firePos.transform.position, currentTarget.position);
+        currentTargets.Clear();
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, StatsController.instance.beamRangeAttack, enemyLayer);
 
-        if (currentTarget.TryGetComponent<DamageReceiver>(out var dmg))
+        List<Collider2D> enemies = new(hits);
+
+        // sap xep enemy theo khoang cach gan nhat
+        enemies.Sort((a, b) =>
         {
-            dmg.TakeDamage(StatsController.instance.beamWeaponDamage * Time.deltaTime);
+            float distA = Vector2.Distance(transform.position, a.transform.position);
+            float distB = Vector2.Distance(transform.position, b.transform.position);
+
+            return distA.CompareTo(distB);
+        });
+
+        // lay ra beamCount enemy gan nhat
+        for (int i = 0; i < Mathf.Min(StatsController.instance.beamLineCount, enemies.Count); i++)
+        {
+            currentTargets.Add(enemies[i].transform);
+        }
+    }
+
+    public void AttackTarget()
+    {
+        for (int i = 0; i < currentTargets.Count; i++)
+        {
+            Transform target = currentTargets[i];
+            LineController line = currentLines[i];
+
+            line.Draw(firePos.position, target.position);
+
+            if (target.TryGetComponent<DamageReceiver>(out var dmg))
+            {
+                dmg.TakeDamage(
+                    StatsController.instance.beamWeaponDamage * Time.deltaTime
+                );
+            }
+        }
+    }
+
+    public void HideAllLine()
+    {
+        foreach (var line in currentLines)
+        {
+            line.Hide();
         }
     }
 }

@@ -19,6 +19,7 @@ public class DamageReceiver : MonoBehaviour
         currentHP -= dmg;
         UpdateHPBar();
         GameObject blood = Instantiate(bloodEffectPrefab, transform.position, Quaternion.identity);
+        blood.transform.SetParent(transform);
         Destroy(blood, 0.5f);
     }
 

@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] protected GameObject gameOverMenu;
     [SerializeField] protected GameObject stageGuidePanel;
     [SerializeField] protected GameObject stageResultPanel;
+    [SerializeField] protected GameObject gameCompleteMenu;
 
     protected void Awake()
     {
@@ -33,6 +34,7 @@ public class UIController : MonoBehaviour
         ShowGamePauseMenu(false);
         SetStageGuidePanel(true);
         SetStageResultPanel(false);
+        ShowGameCompleteMenu(false);
     }
 
     protected void Update()
@@ -109,5 +111,10 @@ public class UIController : MonoBehaviour
         {
             stageResultPanel.SetActive(false);
         }
+    }
+
+    public void ShowGameCompleteMenu(bool value)
+    {
+        gameCompleteMenu.SetActive(value);
     }
 }

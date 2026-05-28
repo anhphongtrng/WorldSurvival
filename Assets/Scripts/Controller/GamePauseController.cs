@@ -11,6 +11,7 @@ public class GamePauseController : MonoBehaviour
     private bool isStatPaused;
     private bool isMenuPaused;
     private bool isGuidePaused;
+    private bool isEndGamePaused;
 
     void Awake()
     {
@@ -47,12 +48,17 @@ public class GamePauseController : MonoBehaviour
         isGuidePaused = value;
     }
 
+    public void SetEndGamePause(bool value)
+    {
+        isEndGamePaused = value;
+    }
+
     public void PressToPause()
     {
-        if(Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             isMenuPaused = !isMenuPaused;
-            if(isMenuPaused)
+            if (isMenuPaused)
             {
                 UIController.instance.ShowGamePauseMenu(true);
             }
@@ -66,7 +72,7 @@ public class GamePauseController : MonoBehaviour
     private void UpdatePauseState()
     {
         PressToPause();
-        if (isOverTimePaused || isGameOverPaused || isStatPaused || isMenuPaused || isGuidePaused)
+        if (isOverTimePaused || isGameOverPaused || isStatPaused || isMenuPaused || isGuidePaused || isEndGamePaused)
         {
             isPaused = true;
             Time.timeScale = 0f;

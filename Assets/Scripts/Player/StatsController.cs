@@ -8,6 +8,8 @@ public class StatsController : MonoBehaviour
     [Header("Combat Stats")]
     public int beamWeaponDamage = 10;
     public int gunWeaponDamage = 2;
+    public float beamRangeAttack = 5;
+    public int beamLineCount = 1;
 
     [Header("Movement Stats")]
     public float moveSpeed = 5f;
@@ -61,7 +63,7 @@ public class StatsController : MonoBehaviour
         maxHealth += amount;
     }
 
-    // UPDATE DAMAGE
+    // UPDATE COMBAT STATS
     public void UpdateBeamDamage(int amount)
     {
         beamWeaponDamage += amount;
@@ -70,6 +72,16 @@ public class StatsController : MonoBehaviour
     public void UpdateGunDamage(int amount)
     {
         gunWeaponDamage += amount;
+    }
+
+    public void UpdateBeamAttackRange(float amount)
+    {
+        beamRangeAttack += amount;
+    }
+
+    public void UpdateBeamLineCount(int amount)
+    {
+        beamLineCount += amount;
     }
 
     // UPDATE BEAM BUFF

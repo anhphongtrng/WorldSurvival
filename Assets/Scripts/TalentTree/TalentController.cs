@@ -36,6 +36,12 @@ public class TalentController : MonoBehaviour
             case "Bonus Time Item Drop Rate Boost":
                 StatsController.instance.UpdateBonusTimeItemDropRate(0.01f);
                 break;
+            case "Beam Attack Range Boost":
+                StatsController.instance.UpdateBeamAttackRange(0.5f);
+                break;
+            case "Beam Count Add":
+                StatsController.instance.UpdateBeamLineCount(1);
+                break;
         }
     }
 }

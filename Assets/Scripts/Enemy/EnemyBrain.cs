@@ -166,10 +166,8 @@ public class EnemyBrain : MonoBehaviour
     public void Dead()
     {
         currentState = EnemyState.Dead;
-
         movement.StopMove();
-
-        //bo.PlayDead();
+        enabled = false;
     }
 
 
