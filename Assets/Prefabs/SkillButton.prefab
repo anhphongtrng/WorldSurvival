@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 6671189059521389952}
   - component: {fileID: 3859430372013105358}
   - component: {fileID: 1264730197001450741}
+  - component: {fileID: -3640356720425488272}
   m_Layer: 5
   m_Name: SkillButton
   m_TagString: Untagged
@@ -430,3 +431,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &-3640356720425488272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826485086661015269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ab7225dba331e4c8433c56322ce276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound

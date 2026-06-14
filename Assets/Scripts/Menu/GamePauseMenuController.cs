@@ -25,8 +25,9 @@ public class GamePauseMenuController : MonoBehaviour
         sceneLoader.LoadNextScene("MainMenu");
     }
 
-    public void OpenOption()
+    public void OpenOptions()
     {
+        UIController.instance.SetVolumeSettingsPanel(true);
         Debug.Log("Open Option");
     }
 }

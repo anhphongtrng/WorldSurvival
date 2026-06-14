@@ -13,6 +13,13 @@ public class UIController : MonoBehaviour
     [SerializeField] protected GameObject stageGuidePanel;
     [SerializeField] protected GameObject stageResultPanel;
     [SerializeField] protected GameObject gameCompleteMenu;
+    [SerializeField] protected GameObject volumeSettingsPanel;
+
+    [Header("Conditions")]
+    private bool isStageResultPanelShown = false; // To track if the stage result panel has been shown
+
+    [Header("Music")]
+    public AudioClip stageResultClip; // Music played when stage completes and stage result panel is shown
 
     protected void Awake()
     {
@@ -24,17 +31,18 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        talentsCanvas = GameObject.Find("TalentsCanvas").GetComponent<Canvas>();    
+        //talentsCanvas = GameObject.Find("TalentsCanvas").GetComponent<Canvas>();    
     }
 
     protected void Start()
     {
-        talentsCanvas.enabled = false;
+        //talentsCanvas.enabled = false;
         ShowGameOverMenu(false);
         ShowGamePauseMenu(false);
         SetStageGuidePanel(true);
         SetStageResultPanel(false);
         ShowGameCompleteMenu(false);
+        SetVolumeSettingsPanel(false);
     }
 
     protected void Update()
@@ -100,21 +108,33 @@ public class UIController : MonoBehaviour
     {
         stageResultPanel.SetActive(value);
     }
-    
+
     public void ShowStageResultPanel()
     {
-        if (timer.IsOverTime() && talentsCanvas.enabled == false)
+        bool shouldShow = timer.IsOverTime() && talentsCanvas.enabled == false;
+
+        if (shouldShow && !isStageResultPanelShown)
         {
             stageResultPanel.SetActive(true);
+            isStageResultPanelShown = true;
+            AudioController.instance.PlaySFX(stageResultClip);
+            AudioController.instance.StopBGM();
+            Debug.Log("Stage Result Panel Shown");
         }
-        else
+        else if (!shouldShow && isStageResultPanelShown)
         {
             stageResultPanel.SetActive(false);
+            isStageResultPanelShown = false;
         }
     }
 
     public void ShowGameCompleteMenu(bool value)
     {
         gameCompleteMenu.SetActive(value);
+    }
+
+    public void SetVolumeSettingsPanel(bool value)
+    {
+        volumeSettingsPanel.SetActive(value);
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerDamageReceiver : DamageReceiver
 {
+    [Header("Music")]
+    public AudioClip playerHitClip;
 
     protected override void Start()
     {
@@ -12,6 +14,7 @@ public class PlayerDamageReceiver : DamageReceiver
     {
         base.TakeDamage(dmg);
         StatsController.instance.currentHealth -= dmg;
+        AudioController.instance.PlaySFX(playerHitClip);
     }
 
     public override float GetCurrentHP()

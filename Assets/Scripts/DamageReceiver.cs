@@ -8,9 +8,14 @@ public class DamageReceiver : MonoBehaviour
     [SerializeField] protected Image hpBar;
     [SerializeField] protected GameObject bloodEffectPrefab;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         currentHP = maxHP;
+    }
+
+    protected virtual void Start()
+    {
+        UpdateHPBar();
     }
 
     public virtual void TakeDamage(float dmg)

@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SandBossHealingSkill
   skillCooldown: 0
+  healingEffectPrefab: {fileID: 7425011695509178077, guid: fc90a478bc0a7c742a5c07134affee37, type: 3}
 --- !u!114 &7377038286510412258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fed7ba597fa7545bb36ae30677b0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  items: []
 --- !u!1 &6263068225426398837
 GameObject:
   m_ObjectHideFlags: 0

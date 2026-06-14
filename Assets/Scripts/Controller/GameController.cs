@@ -25,6 +25,14 @@ public class GameController : MonoBehaviour
     private bool isStageComplete = false;
     protected float delayBeforeEndGame = 1f;
 
+    [Header("Music")]
+    public AudioClip playerDeathClip;
+    public AudioClip normalPhaseClip;
+    public AudioClip miniBossPhaseClip;
+    public AudioClip finalBossPhaseClip;
+    public AudioClip winGameClip;
+
+    [Header("Boss Phase")]
     public BossPhase currentBossPhase = BossPhase.MiniBoss;
 
     public enum BossPhase
@@ -86,12 +94,14 @@ public class GameController : MonoBehaviour
 
                 Instantiate(miniBossPrefab, spawnPosition, Quaternion.identity);
                 Debug.Log("Mini Boss Spawned");
+                AudioController.instance.PlayBGM(miniBossPhaseClip);
                 break;
 
             case BossPhase.FinalBoss:
 
                 Instantiate(finalBossPrefab, spawnPosition, Quaternion.identity);
                 Debug.Log("Final Boss Spawned");
+                AudioController.instance.PlayBGM(finalBossPhaseClip);
                 break;
         }
     }
@@ -141,6 +151,8 @@ public class GameController : MonoBehaviour
         GamePauseController.instance.SetEndGamePause(true);
         UIController.instance.ShowGameCompleteMenu(true);
         Destroy(finalBoss);
+        AudioController.instance.StopBGM();
+        AudioController.instance.PlaySFX(winGameClip);
     }
 
     // =========================
@@ -164,6 +176,7 @@ public class GameController : MonoBehaviour
         isBossSpawned = false;
         isStageComplete = false;
         worldLevel++;
+        AudioController.instance.PlayBGM(normalPhaseClip);
     }
 
     public void OnPlayerDead()
@@ -173,6 +186,8 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        AudioController.instance.PlaySFX(playerDeathClip);
+        AudioController.instance.StopBGM();
         GamePauseController.instance.SetGameOverPause(true);
         UIController.instance.ShowGameOverMenu(true);
         Debug.Log("Game Over");
@@ -180,7 +195,9 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneLoader.instance.LoadNextScene(SceneManager.GetActiveScene().name);
-        UIController.instance.ShowGameOverMenu(false);
+        //SceneLoader.instance.LoadNextScene(SceneManager.GetActiveScene().name);
+        //UIController.instance.ShowGameOverMenu(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Game Restarted");
     }
 }
