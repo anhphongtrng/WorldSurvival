@@ -28,6 +28,9 @@ public class StatsController : MonoBehaviour
     public float bonusTimeItemDropRate = 0.01f;
 
     private Coroutine beamBuffCoroutine;
+
+    [Header("Prefabs")]
+    public GameObject auraPrefab;
     
 
     private void Awake()
@@ -103,15 +106,13 @@ public class StatsController : MonoBehaviour
     private IEnumerator BeamDamageBuff(int amount, float duration)
     {
         beamWeaponDamage += amount;
-
-        playerVisuals.localScale = originalScale * 1.5f;
-
+        GameObject aura = Instantiate(auraPrefab, playerVisuals.position, Quaternion.identity, playerVisuals);
+        aura.transform.SetParent(playerVisuals);
+        playerVisuals.localScale = originalScale * 1.25f;
         yield return new WaitForSeconds(duration);
-
         beamWeaponDamage -= amount;
-
         playerVisuals.localScale = originalScale;
-
+        Destroy(aura);
         beamBuffCoroutine = null;
     }
 

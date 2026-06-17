@@ -5,6 +5,7 @@ public class MainMenuController : MonoBehaviour
 {
     public static MainMenuController instance;
     [SerializeField] private SceneLoader sceneLoader;
+    [SerializeField] private VolumeSettings volumeSettings;
 
     protected void Awake()
     {
@@ -28,5 +29,11 @@ public class MainMenuController : MonoBehaviour
     {
         Debug.Log("Quit Game");
         Application.Quit();
+    }
+
+    public void OpenOption()
+    {
+        volumeSettings.OpenVolumeSettings();
+        Debug.Log("Open Option");
     }
 }

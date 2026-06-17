@@ -25,4 +25,9 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetBool("isRunning", false);
         }
     }
+
+    public void TriggerHitting()
+    {
+        anim.SetTrigger("isHitting");
+    }
 }

@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerUseFireSkill : PlayerSkill
 {
-
+    [Header("Music")]
+    public AudioClip fireSkillClip; // Music played when using the fire skill
     private void Start()
     {
         cooldown = 3f;
@@ -41,12 +42,9 @@ public class PlayerUseFireSkill : PlayerSkill
 
         Vector3 targetPos = currentPreview.transform.position;
 
-        Vector3 direction =
-            (targetPos - startPos).normalized;
+        Vector3 direction = (targetPos - startPos).normalized;
 
-        StartCoroutine(
-            SpawnFireLine(startPos, direction)
-        );
+        StartCoroutine(SpawnFireLine(startPos, direction));
 
         Destroy(currentPreview);
 
@@ -60,18 +58,11 @@ public class PlayerUseFireSkill : PlayerSkill
     {
         int fireCount = 8;
         float spacing = 2f;
-
+        AudioController.instance.PlaySFXWithDuration(fireSkillClip, fireCount * 0.5f);
         for (int i = 1; i < fireCount; i++)
         {
-            Vector3 spawnPos =
-                startPos + i * spacing * direction;
-
-            Instantiate(
-                skillPrefab,
-                spawnPos,
-                Quaternion.identity
-            );
-
+            Vector3 spawnPos = startPos + i * spacing * direction;
+            Instantiate(skillPrefab, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
         }
     }

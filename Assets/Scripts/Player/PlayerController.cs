@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public PlayerMove playerMove;
     public PlayerDamageReceiver playerDamageReceiver;
+    public PlayerAnimation playerAnimation;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
         playerMove = GetComponent<PlayerMove>();
         playerDamageReceiver = GetComponent<PlayerDamageReceiver>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
 }

@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerUseWaterSkill : PlayerSkill
 {
+    [Header("Music")]
+    public AudioClip waterSkillClip; // Music played when using the water skill
+
     private void Start()
     {
         cooldown = 4f;
@@ -38,11 +41,8 @@ public class PlayerUseWaterSkill : PlayerSkill
 
         if (currentPreview == null) return;
 
-        GameObject skill = Instantiate(
-            skillPrefab,
-            currentPreview.transform.position,
-            Quaternion.identity
-        );
+        AudioController.instance.PlaySFXWithDuration(waterSkillClip, 0.5f);
+        GameObject skill = Instantiate(skillPrefab, currentPreview.transform.position, Quaternion.identity);
 
         Destroy(currentPreview);
 

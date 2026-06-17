@@ -40,6 +40,18 @@ public class AudioController : MonoBehaviour
     {
         sfxSource.PlayOneShot(clip);
     }
+    public void PlaySFXWithDuration(AudioClip clip, float duration)
+    {
+        sfxSource.clip = clip;
+        sfxSource.Play();
+        StartCoroutine(StopAfterDelay(duration));
+    }
+
+    private IEnumerator StopAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        sfxSource.Stop();
+    }
 
     public void PlayUIClick()
     {

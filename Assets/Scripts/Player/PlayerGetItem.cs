@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class PlayerGetItem : MonoBehaviour
 {
+    [Header("Music")]
+    public AudioClip getItemClip; // Music played when player gets an item
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("HealItem"))
         {
+            AudioController.instance.PlaySFX(getItemClip);
             StatsController.instance.UpdateCurrentHealth(1f);
             Destroy(collision.gameObject);
         }
 
         else if (collision.CompareTag("BeamDamageBuffItem"))
         {
+            AudioController.instance.PlaySFX(getItemClip);
             float buffDuration = 10f;
             float realDuration = Mathf.Min(buffDuration, Timer.instance.remaningTime);
             StatsController.instance.AddTemporaryBeamDamage(5, realDuration);
@@ -20,6 +24,7 @@ public class PlayerGetItem : MonoBehaviour
 
         else if (collision.CompareTag("BonusTimeItem"))
         {
+            AudioController.instance.PlaySFX(getItemClip);
             Timer.instance.AddTime(10f);
             Destroy(collision.gameObject);
         }

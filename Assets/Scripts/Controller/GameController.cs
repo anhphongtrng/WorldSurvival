@@ -21,8 +21,8 @@ public class GameController : MonoBehaviour
 
     [Header("Stage Progress")]
     public bool isBossSpawned = false;
-    private bool isFinalBossUnlocked = false;
-    private bool isStageComplete = false;
+    [SerializeField] private bool isFinalBossUnlocked = false;
+    [SerializeField] private bool isStageComplete = false;
     protected float delayBeforeEndGame = 1f;
 
     [Header("Music")]
@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour
 
     [Header("Boss Phase")]
     public BossPhase currentBossPhase = BossPhase.MiniBoss;
+
+    [SerializeField] protected BossArrowIndicator bossArrowIndicator;
 
     public enum BossPhase
     {
@@ -83,23 +85,25 @@ public class GameController : MonoBehaviour
 
     private void SpawnBoss()
     {
-        Vector2 spawnPosition = new(
-            Random.Range(-17f, 17f),
-            Random.Range(-17f, 17f)
-        );
-
+        Vector2 spawnPosition = new(Random.Range(-13f, 13f), Random.Range(-18f, 16f));
         switch (currentBossPhase)
         {
             case BossPhase.MiniBoss:
 
-                Instantiate(miniBossPrefab, spawnPosition, Quaternion.identity);
+                GameObject miniBoss = Instantiate(miniBossPrefab, spawnPosition, Quaternion.identity);
+                bossArrowIndicator.boss = miniBoss.transform;
+                bossArrowIndicator.player = PlayerController.instance.transform;
+                bossArrowIndicator.gameObject.SetActive(true);
                 Debug.Log("Mini Boss Spawned");
                 AudioController.instance.PlayBGM(miniBossPhaseClip);
                 break;
 
             case BossPhase.FinalBoss:
 
-                Instantiate(finalBossPrefab, spawnPosition, Quaternion.identity);
+                GameObject finalBoss = Instantiate(finalBossPrefab, spawnPosition, Quaternion.identity);
+                bossArrowIndicator.boss = finalBoss.transform;
+                bossArrowIndicator.player = PlayerController.instance.transform;
+                bossArrowIndicator.gameObject.SetActive(true);
                 Debug.Log("Final Boss Spawned");
                 AudioController.instance.PlayBGM(finalBossPhaseClip);
                 break;

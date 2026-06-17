@@ -6,6 +6,10 @@ public class PlayerUseDustSkill : PlayerSkill
     [SerializeField] private int dustCount = 8;
     [SerializeField] private float radius = 4f;
     [SerializeField] private float skillDuration = 3f;
+
+    [Header("Music")]
+    public AudioClip dustSkillClip; // Music played when using the dust skill
+
     private void Start()
     {
         cooldown = 5f;
@@ -24,7 +28,8 @@ public class PlayerUseDustSkill : PlayerSkill
     public override void UseSkill()
     {
         if (!canUse) return;
-
+        
+        AudioController.instance.PlaySFXWithDuration(dustSkillClip, skillDuration);
         for (int i = 0; i < dustCount; i++)
         {          
             float angle = i * Mathf.PI * 2 / dustCount;
@@ -32,8 +37,7 @@ public class PlayerUseDustSkill : PlayerSkill
             float x = Mathf.Cos(angle) * radius;
             float y = Mathf.Sin(angle) * radius;
 
-            Vector3 spawnPos =
-                transform.position + new Vector3(x, y, 0);
+            Vector3 spawnPos = transform.position + new Vector3(x, y, 0);
 
             GameObject dust = Instantiate(skillPrefab, spawnPos, Quaternion.identity);
             dust.transform.SetParent(transform);

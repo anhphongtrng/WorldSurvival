@@ -31,12 +31,12 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //talentsCanvas = GameObject.Find("TalentsCanvas").GetComponent<Canvas>();    
+        talentsCanvas = GameObject.Find("TalentsCanvas").GetComponent<Canvas>();    
     }
 
     protected void Start()
     {
-        //talentsCanvas.enabled = false;
+        talentsCanvas.enabled = false;
         ShowGameOverMenu(false);
         ShowGamePauseMenu(false);
         SetStageGuidePanel(true);
@@ -67,8 +67,7 @@ public class UIController : MonoBehaviour
     {
         int current = Mathf.Min(EnemySpawner.instance.enemiesKilled, 20);
 
-        bossProgressText.text =
-            "- Defeat enemies to summon Boss: " + current + "/20";
+        bossProgressText.text = "- Defeat enemies to summon Boss: " + current + "/20";
 
         if (GameController.instance.isBossSpawned)
         {
@@ -112,7 +111,6 @@ public class UIController : MonoBehaviour
     public void ShowStageResultPanel()
     {
         bool shouldShow = timer.IsOverTime() && talentsCanvas.enabled == false;
-
         if (shouldShow && !isStageResultPanelShown)
         {
             stageResultPanel.SetActive(true);

@@ -5,6 +5,7 @@ public class PlayerDamageReceiver : DamageReceiver
     [Header("Music")]
     public AudioClip playerHitClip;
 
+
     protected override void Start()
     {
         StatsController.instance.currentHealth = StatsController.instance.maxHealth;
@@ -15,6 +16,7 @@ public class PlayerDamageReceiver : DamageReceiver
         base.TakeDamage(dmg);
         StatsController.instance.currentHealth -= dmg;
         AudioController.instance.PlaySFX(playerHitClip);
+        PlayerController.instance.playerAnimation.TriggerHitting();
     }
 
     public override float GetCurrentHP()
