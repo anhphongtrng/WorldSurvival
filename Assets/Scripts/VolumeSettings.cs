@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] private AudioMixer mainMixer;
+
+    [Header("UI Elements")]
     [SerializeField] private GameObject volumeSettingsPanel;
     [SerializeField] private Slider backgroundMusicSlider;
     [SerializeField] private Slider sfxSlider;

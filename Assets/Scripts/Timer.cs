@@ -4,6 +4,7 @@ public class Timer : MonoBehaviour
 {
     public static Timer instance;
     public float remaningTime;
+    private float runStartTime; // Thoi gian khi game bat dau chay
     public int minutes;
     public int seconds;
 
@@ -18,6 +19,7 @@ public class Timer : MonoBehaviour
     protected void Start()
     {
         remaningTime = 60f;
+        runStartTime = Time.time; // Luu thoi gian khi game bat dau chay
     }
 
     protected void Update()
@@ -43,6 +45,16 @@ public class Timer : MonoBehaviour
         return false;
     }
 
+    public void ResetTime()
+    {
+        remaningTime = 60f;
+    }
+
+    public void SetTimeToZero()
+    {
+        remaningTime = 0f;
+    }
+
     public void StopGame()
     {
         if(IsOverTime())
@@ -58,5 +70,10 @@ public class Timer : MonoBehaviour
     public void AddTime(float amount)
     {
         remaningTime += amount;
+    }
+
+    public float GetElapsedTime()
+    {
+        return Time.time - runStartTime; // Tinh thoi gian da troi qua tu khi game bat dau chay
     }
 }

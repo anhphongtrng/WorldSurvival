@@ -155,8 +155,16 @@ public class GameController : MonoBehaviour
         GamePauseController.instance.SetEndGamePause(true);
         UIController.instance.ShowGameCompleteMenu(true);
         Destroy(finalBoss);
+        SetTimeRankWhenWinGame();
         AudioController.instance.StopBGM();
         AudioController.instance.PlaySFX(winGameClip);
+    }
+
+    public void SetTimeRankWhenWinGame()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        float timeUsed = Timer.instance.GetElapsedTime();
+        RankController.SaveBestTime(currentSceneName, timeUsed);
     }
 
     // =========================
@@ -166,14 +174,16 @@ public class GameController : MonoBehaviour
     private void EndStageForUpgrade()
     {
         isStageComplete = true;
-        Timer.instance.remaningTime = 0f;
+        //Timer.instance.remaningTime = 0f;
+        Timer.instance.SetTimeToZero();
         Debug.Log("Stage Complete - Upgrade Time");
     }
 
     public void LoadNextStage()
     {
         EnemySpawner.instance.ResetSpawner();
-        Timer.instance.remaningTime = 60f;
+        //Timer.instance.remaningTime = 60f;
+        Timer.instance.ResetTime();
         Destroy(GameObject.Find("SandBossEnemy(Clone)"));
         Destroy(GameObject.Find("SkeletonBossGroup(Clone)"));
         UIController.instance.SetTalentsCanvas(false);

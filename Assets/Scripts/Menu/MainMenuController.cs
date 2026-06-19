@@ -6,6 +6,8 @@ public class MainMenuController : MonoBehaviour
     public static MainMenuController instance;
     [SerializeField] private SceneLoader sceneLoader;
     [SerializeField] private VolumeSettings volumeSettings;
+    [SerializeField] private GameObject rankBoardPanel;
+
 
     protected void Awake()
     {
@@ -35,5 +37,14 @@ public class MainMenuController : MonoBehaviour
     {
         volumeSettings.OpenVolumeSettings();
         Debug.Log("Open Option");
+    }
+    public void OpenRankBoard()
+    {
+        rankBoardPanel.SetActive(true);
+    }
+
+    public void CloseRankBoard()
+    {
+        rankBoardPanel.SetActive(false);
     }
 }
