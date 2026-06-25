@@ -23,7 +23,7 @@ public class MainMenuController : MonoBehaviour
     // Button Play
     public void PlayGame()
     {
-        sceneLoader.LoadNextScene("DesertWorld");
+        sceneLoader.LoadNextScene("WorldSelector");
     }
 
     // Button Quit

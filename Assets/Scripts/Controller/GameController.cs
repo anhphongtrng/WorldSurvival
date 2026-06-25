@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     public BossPhase currentBossPhase = BossPhase.MiniBoss;
 
     [SerializeField] protected BossArrowIndicator bossArrowIndicator;
+    [SerializeField] protected GameSceneController gameSceneController;
 
     public enum BossPhase
     {
@@ -156,6 +157,7 @@ public class GameController : MonoBehaviour
         UIController.instance.ShowGameCompleteMenu(true);
         Destroy(finalBoss);
         SetTimeRankWhenWinGame();
+        gameSceneController.CompleteCurrentWorld();
         AudioController.instance.StopBGM();
         AudioController.instance.PlaySFX(winGameClip);
     }
