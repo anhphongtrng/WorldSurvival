@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyBrain : MonoBehaviour
@@ -18,21 +19,20 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] Vector2 thinkDelayRange = new(2.5f, 3.5f);
     private bool canThink = true;
 
-    [Header("Components")]
-    public SkeletonBossMovement movement;
-    public SkeletonBossAnimation anim;
+    //[Header("Components")]
+    //public SkeletonBossMovement movement;
+    //public SkeletonBossAnimation animations;
 
     [Header("Skills")]
     public EnemySkill[] skills;
     private EnemySkill lastSkill;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        movement = GetComponent<SkeletonBossMovement>();
-        anim = GetComponent<SkeletonBossAnimation>();
+
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if(player != null)
@@ -41,7 +41,12 @@ public class EnemyBrain : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
+    {
+        CheckState();
+    }
+
+    protected virtual void CheckState()
     {
         if (currentState == EnemyState.Dead)
             return;
@@ -49,27 +54,22 @@ public class EnemyBrain : MonoBehaviour
         if (target == null)
             return;
 
-        float distance =
-            Vector2.Distance(transform.position, target.position);
+        float distance = Vector2.Distance(transform.position, target.position);
 
-        // ngoài range -> idle
         if (distance >= chaseRange)
         {
             Idle();
             return;
         }
 
-        // nếu không busy -> chase player
         if (currentState != EnemyState.Busy)
         {
             Chase();
         }
 
-        // nếu chưa được nghĩ skill
         if (!canThink)
             return;
 
-        // nếu đang busy thì không cast skill
         if (currentState == EnemyState.Busy)
             return;
 
@@ -81,20 +81,38 @@ public class EnemyBrain : MonoBehaviour
         }
     }
 
-    private void Idle()
+    protected virtual void StopMovement()
+    {
+        //movement.StopMove();
+    }
+
+    protected virtual void SetWalkingAnimation(bool isWalking)
+    {
+        //animations.SetWalking(isWalking);
+    }
+
+    protected virtual void StartMoveToTarget()
+    {
+        //movement.MoveToTarget();
+    }
+
+    protected virtual void Idle()
     {
         currentState = EnemyState.Idle;
-        movement.StopMove();
-        anim.SetWalking(false);
+        //movement.StopMove();
+        StopMovement();
+        //animations.SetWalking(false);
+        SetWalkingAnimation(false);
     }
 
-    private void Chase()
+    protected virtual void Chase()
     {
         currentState = EnemyState.Chase;
-        movement.MoveToTarget();
+        //movement.MoveToTarget();
+        StartMoveToTarget();
     }
 
-    private EnemySkill ChooseSkill()
+    protected virtual EnemySkill ChooseSkill()
     {
         List<EnemySkill> availableSkills = new();
 
@@ -115,8 +133,7 @@ public class EnemyBrain : MonoBehaviour
             totalWeight += skill.weight;
         }
 
-        int randomValue =
-            Random.Range(0, totalWeight);
+        int randomValue = Random.Range(0, totalWeight);
 
         int currentWeight = 0;
 
@@ -133,14 +150,15 @@ public class EnemyBrain : MonoBehaviour
         return null;
     }
 
-    private IEnumerator UseSkill(EnemySkill skill)
+    protected virtual IEnumerator UseSkill(EnemySkill skill)
     {
         currentState = EnemyState.Busy;
 
         if(skill.stopMovementWhenUseSkill)
         {
             Debug.Log("Stop movement to use skill: " + skill.skillName);
-            movement.StopMove();
+            //movement.StopMove();
+            StopMovement();
         }
 
         lastSkill = skill;
@@ -152,7 +170,7 @@ public class EnemyBrain : MonoBehaviour
         yield return StartCoroutine(ThinkDelay(skill.recoveryTime));
     }
 
-    private IEnumerator ThinkDelay(float recovery)
+    protected virtual IEnumerator ThinkDelay(float recovery)
     {
         canThink = false;
 
@@ -163,12 +181,12 @@ public class EnemyBrain : MonoBehaviour
         canThink = true;
     }
 
-    public void Dead()
+    public virtual void Dead()
     {
         currentState = EnemyState.Dead;
-        movement.StopMove();
+        //movement.StopMove();
+        StopMovement();
         enabled = false;
     }
-
 
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class WeaponController : MonoBehaviour
 {
@@ -7,14 +8,17 @@ public class WeaponController : MonoBehaviour
     [SerializeField] GameObject gunObject;
 
     GameObject currentWeapon;
+    protected string worldName;
 
     private void Awake()
     {
         gunObject = GameObject.Find("Gun");
         gunObject.SetActive(false);
         beamObject = GameObject.Find("Beam");
-        currentWeapon = beamObject; 
-        currentWeapon.SetActive(true);
+        beamObject.SetActive(false);
+        //currentWeapon = beamObject; 
+        //currentWeapon.SetActive(true);
+        SetWeaponByWorld();
     }
 
     private void Update()
@@ -41,5 +45,25 @@ public class WeaponController : MonoBehaviour
 
         currentWeapon = newWeapon;
         currentWeapon.SetActive(true);
+    }
+
+    public void SetWeaponByWorld()
+    {
+        worldName = SceneManager.GetActiveScene().name;
+        Debug.Log("Current World: " + worldName);
+        switch (worldName)
+        {
+            case "DesertWorld":
+                EquipWeapon(beamObject);
+                Debug.Log("Equipped Beam Weapon for DesertWorld");
+                break;
+            case "SnowWorld":
+                EquipWeapon(gunObject);
+                Debug.Log("Equipped Gun Weapon for SnowWorld");
+                break;
+            default:
+                EquipWeapon(beamObject);
+                break;
+        }
     }
 }
