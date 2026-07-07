@@ -22,6 +22,7 @@ public class GunReload : MonoBehaviour
         {
             AudioController.instance.PlaySFX(reloadClip);
             gunController.gunShooting.SetCurrentAmmo(gunController.gunShooting.GetMaxAmmo());
+            gunController.gunShooting.UpdateAmmoUI();
         }
     }
 }

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 9d5e14476a452c942bb7f9b058886d00
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: bb57ddb1daed1be4780ecdc2f8a00493
   - enabled: 1
@@ -16,7 +19,7 @@ EditorBuildSettings:
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/SnowWorld.unity
-    guid: b923055364e795e41b71083b3bb2390b
+    guid: 91dff8880482bad43b8187195644ff0c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

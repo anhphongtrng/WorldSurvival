@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
@@ -29,8 +29,14 @@ public class MainMenuController : MonoBehaviour
     // Button Quit
     public void QuitGame()
     {
-        Debug.Log("Quit Game");
-        Application.Quit();
+        Debug.Log("Logging out - quay về màn Login");
+
+        // Delete Remember Me data
+        PlayerPrefs.DeleteKey("SavedRefreshToken");
+        PlayerPrefs.SetInt("RememberMeChecked", 0);
+        PlayerPrefs.Save();
+
+        sceneLoader.LoadNextScene("Login");
     }
 
     public void OpenOption()
