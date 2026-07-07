@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class SkeletonBossBrain : EnemyBrain
 {
     [Header("Skeleton Boss – Components")]
@@ -29,5 +28,4 @@ public class SkeletonBossBrain : EnemyBrain
     {
         movement.MoveToTarget();
     }
-
 }

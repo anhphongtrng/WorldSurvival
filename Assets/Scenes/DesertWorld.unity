@@ -1015,7 +1015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755937798573616321, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_text
-      value: 0/4
+      value: Locked
       objectReference: {fileID: 0}
     - target: {fileID: 2172248178416076884, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1029,6 +1029,10 @@ PrefabInstance:
       propertyPath: skillSO
       value: 
       objectReference: {fileID: 11400000, guid: bf64a0baa9146da4aace98413c166dff, type: 2}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: prerequisiteSkills.Array.size
       value: 1
@@ -4823,7 +4827,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11645,7 +11649,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755937798573616321, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: Locked
       objectReference: {fileID: 0}
     - target: {fileID: 2172248178416076884, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -11659,6 +11663,10 @@ PrefabInstance:
       propertyPath: skillSO
       value: 
       objectReference: {fileID: 11400000, guid: 706d19bac85d6c54e9e224f02128b12b, type: 2}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: prerequisiteSkills.Array.size
       value: 1
@@ -49381,7 +49389,7 @@ Camera:
   far clip plane: 1000
   field of view: 2.1
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 12
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -49422,7 +49430,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755937798573616321, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: Locked
       objectReference: {fileID: 0}
     - target: {fileID: 2172248178416076884, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -49436,6 +49444,10 @@ PrefabInstance:
       propertyPath: skillSO
       value: 
       objectReference: {fileID: 11400000, guid: 3b4c3b29d8fa1e44b812546feb681eda, type: 2}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: prerequisiteSkills.Array.size
       value: 1
@@ -50827,7 +50839,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755937798573616321, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: Locked
       objectReference: {fileID: 0}
     - target: {fileID: 2172248178416076884, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -50841,6 +50853,10 @@ PrefabInstance:
       propertyPath: skillSO
       value: 
       objectReference: {fileID: 11400000, guid: 47834379418a2564ba40dfede4885299, type: 2}
+    - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
+      propertyPath: isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3542797842232923362, guid: b622acb31b6e5c14fa4c43c1559f6dc9, type: 3}
       propertyPath: prerequisiteSkills.Array.size
       value: 1

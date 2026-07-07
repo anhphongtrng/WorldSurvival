@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GunShooting : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class GunShooting : MonoBehaviour
     protected float shootRate = 0.5f;
     [SerializeField] protected int maxAmmo = 30;
     [SerializeField] protected int currentAmmo;
+    [SerializeField] protected AudioClip shootClip;
+    [SerializeField] protected TextMeshProUGUI ammoText;
+
+    protected bool isShooting = false;
 
     void Start()
     {
@@ -17,7 +23,12 @@ public class GunShooting : MonoBehaviour
 
     void Update()
     {
-        Shoot();
+        if (Time.timeScale == 0) return;
+
+        if (Mouse.current.leftButton.isPressed && Time.time >= shootTime && currentAmmo > 0 && !isShooting)
+        {
+            StartCoroutine(Shoot());
+        }
     }
 
     public int GetMaxAmmo()
@@ -35,14 +46,34 @@ public class GunShooting : MonoBehaviour
         currentAmmo = ammo;
     }
 
-    public void Shoot()
+    public IEnumerator Shoot()
     {
-        if (Mouse.current.leftButton.isPressed && Time.time >= shootTime && currentAmmo > 0)
+        isShooting = true;
+
+        AudioController.instance.PlaySFX(shootClip);
+
+        for (int i = 0; i < StatsController.instance.bulletsPerShot; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab, firePos.position, firePos.rotation);
-            bullet.transform.SetParent(transform);
-            shootTime = Time.time + shootRate;
-            currentAmmo--;
+            Instantiate(bulletPrefab, firePos.position, firePos.rotation);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        currentAmmo--;
+        UpdateAmmoUI();
+        shootTime = Time.time + shootRate;
+
+        isShooting = false;
+    }
+
+    public void UpdateAmmoUI()
+    {
+        if (currentAmmo > 0)
+        {
+            ammoText.text = currentAmmo + " / " + maxAmmo;
+        }
+        else
+        {
+            ammoText.text = "Press Right Mouse Button to Reload";
         }
     }
 }

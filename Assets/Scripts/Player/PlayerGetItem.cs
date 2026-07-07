@@ -22,6 +22,15 @@ public class PlayerGetItem : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        else if (collision.CompareTag("GunDamageBuffItem"))
+        {
+            AudioController.instance.PlaySFX(getItemClip);
+            float buffDuration = 10f;
+            float realDuration = Mathf.Min(buffDuration, Timer.instance.remaningTime);
+            StatsController.instance.AddTemporaryGunDamage(5, realDuration);
+            Destroy(collision.gameObject);
+        }
+
         else if (collision.CompareTag("BonusTimeItem"))
         {
             AudioController.instance.PlaySFX(getItemClip);

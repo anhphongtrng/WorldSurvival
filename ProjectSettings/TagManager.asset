@@ -9,6 +9,7 @@ TagManager:
   - HealItem
   - BeamDamageBuffItem
   - BonusTimeItem
+  - GunDamageBuffItem
   layers:
   - Default
   - TransparentFX

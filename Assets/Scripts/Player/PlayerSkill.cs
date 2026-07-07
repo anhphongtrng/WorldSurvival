@@ -29,10 +29,7 @@ public abstract class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        // Lấy vị trí chuột trong world
-        mousePos = Camera.main.ScreenToWorldPoint(
-            Mouse.current.position.ReadValue()
-        );
+        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         mousePos.z = 0;
 

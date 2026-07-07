@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4599096699294647808}
   - component: {fileID: 1391227620744518834}
   - component: {fileID: -442757930061510497}
+  - component: {fileID: 4681614282714858946}
   m_Layer: 0
   m_Name: GunBullet
   m_TagString: GunBullet
@@ -193,3 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b27ea0e1d2999d44898bf9ec627472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  items: []
+--- !u!114 &4681614282714858946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4096124436487686239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dce821dcb3ee1449a910868d1a7d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletDamageSender

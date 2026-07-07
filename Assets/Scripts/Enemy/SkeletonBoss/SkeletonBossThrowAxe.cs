@@ -4,7 +4,7 @@ using UnityEngine;
 public class SkeletonBossThrowAxe : EnemySkill
 {
     [Header("Components")]
-    [SerializeField] protected SkeletonBossAnimation enemyAnimation;
+    [SerializeField] protected SkeletonBossAnimation skeletonBossAnimation;
 
     [Header("Prefab")]
     [SerializeField] protected GameObject axePrefab;
@@ -22,7 +22,7 @@ public class SkeletonBossThrowAxe : EnemySkill
     protected override void Awake()
     {
         base.Awake();
-        enemyAnimation = GetComponent<SkeletonBossAnimation>();
+        skeletonBossAnimation = GetComponent<SkeletonBossAnimation>();
     }
 
     private void Start()
@@ -42,7 +42,7 @@ public class SkeletonBossThrowAxe : EnemySkill
     public override IEnumerator Execute()
     {
         StartCoroutine(StartCooldown());
-        enemyAnimation.TriggerAttack1();
+        skeletonBossAnimation.TriggerAttack1();
         yield return new WaitForSeconds(throwDelay);
         ThrowAxe();
     }

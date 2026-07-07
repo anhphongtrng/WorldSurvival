@@ -7,9 +7,11 @@ public class StatsController : MonoBehaviour
 
     [Header("Combat Stats")]
     public int beamWeaponDamage = 10;
-    public int gunWeaponDamage = 2;
     public float beamRangeAttack = 5;
     public int beamLineCount = 1;
+
+    public int gunWeaponDamage = 20;
+    public int bulletsPerShot = 1;
 
     [Header("Movement Stats")]
     public float moveSpeed = 5f;
@@ -25,9 +27,11 @@ public class StatsController : MonoBehaviour
     [Header("Drop Items Rate")]
     public float healItemDropRate = 0.01f;
     public float beamDamageBuffItemDropRate = 0.01f;
+    public float gunDamageBuffItemDropRate = 0.01f;
     public float bonusTimeItemDropRate = 0.01f;
 
     private Coroutine beamBuffCoroutine;
+    private Coroutine gunBuffCoroutine;
 
     [Header("Prefabs")]
     public GameObject auraPrefab;
@@ -72,10 +76,6 @@ public class StatsController : MonoBehaviour
         beamWeaponDamage += amount;
     }
 
-    public void UpdateGunDamage(int amount)
-    {
-        gunWeaponDamage += amount;
-    }
 
     public void UpdateBeamAttackRange(float amount)
     {
@@ -85,6 +85,15 @@ public class StatsController : MonoBehaviour
     public void UpdateBeamLineCount(int amount)
     {
         beamLineCount += amount;
+    }
+    public void UpdateGunDamage(int amount)
+    {
+        gunWeaponDamage += amount;
+    }
+
+    public void UpdateMaxBulletsPerShot(int amount)
+    {
+        bulletsPerShot += amount;
     }
 
     // UPDATE BEAM BUFF
@@ -116,6 +125,32 @@ public class StatsController : MonoBehaviour
         beamBuffCoroutine = null;
     }
 
+    // UPDATE GUN BUFF
+    public void AddTemporaryGunDamage(int amount, float duration)
+    {
+        if (gunBuffCoroutine != null)
+        {
+            StopCoroutine(gunBuffCoroutine);
+            // remove old buff first
+            gunWeaponDamage -= amount;
+            playerVisuals.localScale = originalScale;
+        }
+        gunBuffCoroutine = StartCoroutine(GunDamageBuff(amount, duration));
+    }
+
+    private IEnumerator GunDamageBuff(int amount, float duration)
+    {
+        gunWeaponDamage += amount;
+        GameObject aura = Instantiate(auraPrefab, playerVisuals.position, Quaternion.identity, playerVisuals);
+        aura.transform.SetParent(playerVisuals);
+        playerVisuals.localScale = originalScale * 1.25f;
+        yield return new WaitForSeconds(duration);
+        gunWeaponDamage -= amount;
+        playerVisuals.localScale = originalScale;
+        Destroy(aura);
+        gunBuffCoroutine = null;
+    }
+
     // UPDATE MOVEMENT
     public void UpdateMoveSpeed(float amount)
     {
@@ -131,6 +166,11 @@ public class StatsController : MonoBehaviour
     public void UpdateBeamDamageBuffItemDropRate(float amount)
     {
         beamDamageBuffItemDropRate += amount;
+    }
+
+    public void UpdateGunDamageBuffItemDropRate(float amount)
+    {
+        gunDamageBuffItemDropRate += amount;
     }
 
     public void UpdateBonusTimeItemDropRate(float amount)

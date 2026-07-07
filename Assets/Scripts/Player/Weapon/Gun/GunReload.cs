@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class GunReload : MonoBehaviour
 {
     protected GunController gunController;
+    [SerializeField] protected AudioClip reloadClip;
 
     private void Awake()
     {
@@ -17,8 +18,9 @@ public class GunReload : MonoBehaviour
 
     public void Reload()
     {
-        if(Keyboard.current.rKey.wasPressedThisFrame)
+        if(Mouse.current.rightButton.wasPressedThisFrame)
         {
+            AudioController.instance.PlaySFX(reloadClip);
             gunController.gunShooting.SetCurrentAmmo(gunController.gunShooting.GetMaxAmmo());
         }
     }

@@ -5,6 +5,7 @@ public class PlayerDamageReceiver : DamageReceiver
     [Header("Music")]
     public AudioClip playerHitClip;
 
+    private bool isInvincible = false;
 
     protected override void Start()
     {
@@ -13,6 +14,8 @@ public class PlayerDamageReceiver : DamageReceiver
 
     public override void TakeDamage(float dmg)
     {
+        if (isInvincible) return;
+
         base.TakeDamage(dmg);
         StatsController.instance.currentHealth -= dmg;
         AudioController.instance.PlaySFX(playerHitClip);
@@ -45,5 +48,10 @@ public class PlayerDamageReceiver : DamageReceiver
     public override bool IsDead()
     {
         return StatsController.instance.currentHealth <= 0;
+    }
+
+    public void SetInvincible(bool value)
+    {
+        isInvincible = value;
     }
 }

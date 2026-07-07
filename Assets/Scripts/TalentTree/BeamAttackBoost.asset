@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f96e0f0e976e8644928565a0d0db527, type: 3}
-  m_Name: AttackBoost
+  m_Name: BeamAttackBoost
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
-  skillName: Attack Boost
+  skillName: Beam Attack Boost
   maxLevel: 3
   description: Add 1 to Beam Attack
   skillIcon: {fileID: 860910309584662230, guid: 50ee919e25ed35e449ba69eab02a65b8, type: 3}

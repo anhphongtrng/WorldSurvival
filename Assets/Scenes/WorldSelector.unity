@@ -2467,6 +2467,7 @@ MonoBehaviour:
   worlds:
   - {fileID: 11400000, guid: b2eab229848254447a455def43985f0c, type: 2}
   - {fileID: 11400000, guid: df06b3e6f9576de4190d20de4cf324d6, type: 2}
+  - {fileID: 11400000, guid: 418e230feee33e440a1a4266eb631a83, type: 2}
   worldCardPrefab: {fileID: 7277560894953220699, guid: 326a9cfe3356279428480f7b19685e39, type: 3}
   cardContainer: {fileID: 248706324}
   confirmPanel: {fileID: 202862150}

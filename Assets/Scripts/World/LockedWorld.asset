@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223db916fe7b37f43aca70e32c3a915b, type: 3}
+  m_Name: LockedWorld
+  m_EditorClassIdentifier: Assembly-CSharp::WorldDataSO
+  worldIndex: 2
+  worldName: ???
+  worldDescription: There will be more world
+  worldThumbnail: {fileID: 6257305729204472095, guid: ae7389c73d8242047950624ffbf793e7, type: 3}
+  worldSceneName: 
+  worldColor: {r: 0.3886792, g: 0.3886792, b: 0.3886792, a: 1}

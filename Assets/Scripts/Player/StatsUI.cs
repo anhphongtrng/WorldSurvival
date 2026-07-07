@@ -42,6 +42,11 @@ public class StatsUI : MonoBehaviour
         statsSlot[4].GetComponentInChildren<TextMeshProUGUI>().text = "Beam DMG Buff Item Rate: " + StatsController.instance.beamDamageBuffItemDropRate.ToString();
     }
 
+    public void UpdateGunDamageBuffItemRateUI()
+    {
+        statsSlot[6].GetComponentInChildren<TextMeshProUGUI>().text = "Gun DMG Buff Item Rate: " + StatsController.instance.gunDamageBuffItemDropRate.ToString();
+    }
+
     public void UpdateBonusTimeItemRateUI()
     {
         statsSlot[5].GetComponentInChildren<TextMeshProUGUI>().text = "Bonus Time Item Rate: " + StatsController.instance.bonusTimeItemDropRate.ToString();
@@ -49,12 +54,37 @@ public class StatsUI : MonoBehaviour
 
     public void UpdateAllStats()
     {
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        switch(sceneName)
+        {
+            case "DesertWorld":
+                statsSlot[0].SetActive(true);
+                statsSlot[1].SetActive(false);
+                statsSlot[2].SetActive(true);
+                statsSlot[3].SetActive(true);
+                statsSlot[4].SetActive(true);
+                statsSlot[5].SetActive(true);
+                statsSlot[6].SetActive(false);
+                break;
+            case "SnowWorld":
+                statsSlot[0].SetActive(false);
+                statsSlot[1].SetActive(true);
+                statsSlot[2].SetActive(true);
+                statsSlot[3].SetActive(true);
+                statsSlot[4].SetActive(false);
+                statsSlot[5].SetActive(true);
+                statsSlot[6].SetActive(true);
+                break;
+        }
+
         UpdateBeamDamageUI();
         UpdateGunDamageUI();
         UpdateMoveSpeedUI();
         UpdateHealItemRateUI();
         UpdateBeamDamageBuffItemRateUI();
         UpdateBonusTimeItemRateUI();
+        UpdateGunDamageBuffItemRateUI();
     }
 
     public void OpenStatsCanvas()

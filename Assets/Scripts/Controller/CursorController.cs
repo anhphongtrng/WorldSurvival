@@ -27,11 +27,11 @@ public class CursorController : MonoBehaviour
         {
             Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.Auto);
         }
-        else if (Keyboard.current.rKey.isPressed)
+        else if (Mouse.current.rightButton.isPressed)
         {
             Cursor.SetCursor(cursorReload, Vector2.zero, CursorMode.Auto);
         }
-         else if (Keyboard.current.rKey.wasReleasedThisFrame)
+         else if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
             Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.Auto);
         }

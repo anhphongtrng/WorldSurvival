@@ -12,6 +12,10 @@ public class ItemData : MonoBehaviour
         {
             return StatsController.instance.beamDamageBuffItemDropRate;
         }
+        else if (CompareTag("GunDamageBuffItem"))
+        {
+            return StatsController.instance.gunDamageBuffItemDropRate;
+        }
         else if (CompareTag("BonusTimeItem"))
         {
             return StatsController.instance.bonusTimeItemDropRate;

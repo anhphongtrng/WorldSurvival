@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 
     [Header("Boss Prefabs")]
     [SerializeField] private GameObject miniBossPrefab;
+    [SerializeField] protected GameObject currentMiniBoss;
     [SerializeField] private GameObject finalBossPrefab;
 
     [Header("Boss Spawn")]
@@ -91,8 +92,8 @@ public class GameController : MonoBehaviour
         {
             case BossPhase.MiniBoss:
 
-                GameObject miniBoss = Instantiate(miniBossPrefab, spawnPosition, Quaternion.identity);
-                bossArrowIndicator.boss = miniBoss.transform;
+                currentMiniBoss = Instantiate(miniBossPrefab, spawnPosition, Quaternion.identity);
+                bossArrowIndicator.boss = currentMiniBoss.transform;
                 bossArrowIndicator.player = PlayerController.instance.transform;
                 bossArrowIndicator.gameObject.SetActive(true);
                 Debug.Log("Mini Boss Spawned");
@@ -186,8 +187,7 @@ public class GameController : MonoBehaviour
         EnemySpawner.instance.ResetSpawner();
         //Timer.instance.remaningTime = 60f;
         Timer.instance.ResetTime();
-        Destroy(GameObject.Find("SandBossEnemy(Clone)"));
-        Destroy(GameObject.Find("SkeletonBossGroup(Clone)"));
+        Destroy(currentMiniBoss);
         UIController.instance.SetTalentsCanvas(false);
         isBossSpawned = false;
         isStageComplete = false;

@@ -28,10 +28,6 @@ public class SkeletonBossAnimation : MonoBehaviour
         animator.SetBool("isSpeedBoosting", value);
     }
 
-    public void TriggerSpeedBoost()
-    {
-        animator.SetTrigger("isSpeedBoost");
-    }
 
     public void TriggerDeath()
     {
