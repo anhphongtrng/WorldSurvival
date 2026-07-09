@@ -11,6 +11,8 @@ public class FirebaseAuthController : MonoBehaviour
     private const string SIGNUP_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
     private const string SIGNIN_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
     private const string REFRESH_URL = "https://securetoken.googleapis.com/v1/token?key=";
+    private const string SEND_VERIFICATION_URL = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=";
+    private const string LOOKUP_URL = "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=";
 
     // Luu lai sau khi login thanh cong, dung de goi Database sau nay
     public static string CurrentIdToken { get; private set; }
@@ -42,6 +44,33 @@ public class FirebaseAuthController : MonoBehaviour
         public string id_token;
         public string user_id;
         public string refresh_token;
+    }
+
+    [Serializable]
+    private class OobCodeRequest
+    {
+        public string requestType = "VERIFY_EMAIL";
+        public string idToken;
+    }
+
+    [Serializable]
+    private class LookupRequest
+    {
+        public string idToken;
+    }
+
+    [Serializable]
+    private class LookupResponse
+    {
+        public UserInfo[] users;
+    }
+
+    [Serializable]
+    private class UserInfo
+    {
+        public string localId;
+        public string email;
+        public bool emailVerified;
     }
 
     // Goi ham nay de dang ky tai khoan moi
@@ -133,5 +162,73 @@ public class FirebaseAuthController : MonoBehaviour
         }
         catch { }
         return json;
+    }
+
+    // Goi ham nay sau khi Register thanh cong de gui email xac thuc
+    public void SendEmailVerification(Action<bool, string> onComplete)
+    {
+        StartCoroutine(SendVerificationRequest(onComplete));
+    }
+
+    // Goi ham nay de kiem tra xem user da xac thuc email chua
+    public void CheckEmailVerified(Action<bool, bool, string> onComplete)
+    {
+        StartCoroutine(CheckVerifiedRequest(onComplete));
+    }
+
+    private IEnumerator SendVerificationRequest(Action<bool, string> onComplete)
+    {
+        string url = SEND_VERIFICATION_URL + API_KEY;
+        OobCodeRequest reqBody = new OobCodeRequest { idToken = CurrentIdToken };
+        string jsonBody = JsonUtility.ToJson(reqBody);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        {
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                onComplete?.Invoke(true, "Verification email sent. Please check your inbox.");
+            }
+            else
+            {
+                string errorMsg = ParseErrorMessage(request.downloadHandler.text);
+                onComplete?.Invoke(false, "Failed to send verification email: " + errorMsg);
+            }
+        }
+    }
+
+    // bool thu 2 la trang thai emailVerified (true/false), bool thu 1 la request co thanh cong khong
+    private IEnumerator CheckVerifiedRequest(Action<bool, bool, string> onComplete)
+    {
+        string url = LOOKUP_URL + API_KEY;
+        LookupRequest reqBody = new LookupRequest { idToken = CurrentIdToken };
+        string jsonBody = JsonUtility.ToJson(reqBody);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        {
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                LookupResponse response = JsonUtility.FromJson<LookupResponse>(request.downloadHandler.text);
+                bool verified = response.users != null && response.users.Length > 0 && response.users[0].emailVerified;
+                onComplete?.Invoke(true, verified, verified ? "Email verified" : "Email not verified yet");
+            }
+            else
+            {
+                onComplete?.Invoke(false, false, "Could not check verification status");
+            }
+        }
     }
 }

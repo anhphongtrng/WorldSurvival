@@ -71,7 +71,7 @@ public class WorldSelectorController : MonoBehaviour
 
         if (confirmPanel != null)
         {
-            if (confirmWorldName) confirmWorldName.text = selectedWorld.worldName;
+            if (confirmWorldName) confirmWorldName.text ="Go to " + selectedWorld.worldName + "?";
             confirmPanel.SetActive(true);
         }
         else

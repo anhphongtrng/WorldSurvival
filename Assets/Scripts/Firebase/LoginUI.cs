@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
@@ -7,7 +8,14 @@ public class LoginUI : MonoBehaviour
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
     public TMP_Text statusText;
-    public UnityEngine.UI.Toggle rememberMeToggle;
+    public Toggle rememberMeToggle;
+
+    [Header("Panels")]
+    public GameObject loginPanel;
+    public GameObject registerPanel;
+
+    [Header("Verification")]
+    public GameObject resendVerificationButton;
 
     private FirebaseAuthController authManager;
     private FirebaseDatabaseController dbManager;
@@ -20,6 +28,9 @@ public class LoginUI : MonoBehaviour
     {
         authManager = gameObject.AddComponent<FirebaseAuthController>();
         dbManager = gameObject.AddComponent<FirebaseDatabaseController>();
+
+        loginPanel.SetActive(true);
+        registerPanel.SetActive(false);
 
         TryAutoLogin();
     }
@@ -64,27 +75,57 @@ public class LoginUI : MonoBehaviour
 
     public void OnRegisterClicked()
     {
-        statusText.text = "Currently registering...";
+        statusText.text = "Registering...";
         authManager.Register(emailInput.text, passwordInput.text, (success, message) =>
         {
-            statusText.text = message;
+            if (success)
+            {
+                // Gui email xac thuc ngay sau khi tao tai khoan xong
+                authManager.SendEmailVerification((sent, sendMsg) =>
+                {
+                    statusText.text = sent
+                        ? "Account created! A verification email has been sent to your inbox."
+                        : sendMsg;
+                });
+            }
+            else
+            {
+                statusText.text = message;
+            }
             Debug.Log(message);
         });
     }
 
     public void OnLoginClicked()
     {
-        statusText.text = "Currently logging in...";
+        statusText.text = "Logging in...";
+        resendVerificationButton.SetActive(false); // an nut gui lai email xac thuc
         authManager.Login(emailInput.text, passwordInput.text, (success, message) =>
         {
-            statusText.text = message;
             Debug.Log(message);
 
             if (success)
             {
-                SaveRememberMe();
-                TestWriteData();
-                sceneLoader.LoadNextScene("MainMenu");
+                // Kiem tra email da xac thuc chua truoc khi cho vao game
+                authManager.CheckEmailVerified((checkSuccess, isVerified, checkMsg) =>
+                {
+                    if (isVerified)
+                    {
+                        statusText.text = "Login successful!";
+                        SaveRememberMe();
+                        TestWriteData();
+                        sceneLoader.LoadNextScene("MainMenu");
+                    }
+                    else
+                    {
+                        statusText.text = "Please verify your email before logging in.";
+                        resendVerificationButton.SetActive(true);
+                    }
+                });
+            }
+            else
+            {
+                statusText.text = message;
             }
         });
     }
@@ -96,6 +137,35 @@ public class LoginUI : MonoBehaviour
         dbManager.SetData("players/" + userId, jsonData, (success, response) =>
         {
             Debug.Log(success ? "Data write successful: " + response : response);
+        });
+    }
+
+    public void ShowRegisterPanel()
+    {
+        loginPanel.SetActive(false);
+        registerPanel.SetActive(true);
+        statusText.text = ""; // xoa thong bao cu
+    }
+
+    public void ShowLoginPanel()
+    {
+        registerPanel.SetActive(false);
+        loginPanel.SetActive(true);
+        statusText.text = "";
+    }
+
+    public void OnResendVerificationClicked()
+    {
+        if (string.IsNullOrEmpty(FirebaseAuthController.CurrentIdToken))
+        {
+            statusText.text = "Please log in first to resend verification email.";
+            return;
+        }
+
+        statusText.text = "Sending...";
+        authManager.SendEmailVerification((sent, message) =>
+        {
+            statusText.text = message;
         });
     }
 }
