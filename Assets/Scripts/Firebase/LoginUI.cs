@@ -34,18 +34,18 @@ public class LoginUI : MonoBehaviour
         loginPanel.SetActive(true);
         registerPanel.SetActive(false);
 
-        TryAutoLogin();
+        //TryAutoLogin();
     }
 
     // Kiem tra xem co refresh token da luu khong, neu co thi tu dong dang nhap
-    private void TryAutoLogin()
+    public void TryAutoLogin()
     {
         bool wasRemembered = PlayerPrefs.GetInt(PREF_REMEMBER, 0) == 1;
         string savedToken = PlayerPrefs.GetString(PREF_REFRESH_TOKEN, "");
 
         if (wasRemembered && !string.IsNullOrEmpty(savedToken))
         {
-            statusText.text = "Đang tự động đăng nhập...";
+            statusText.text = "Auto login...";
             authManager.RefreshLogin(savedToken, (success, message) =>
             {
                 if (success)
