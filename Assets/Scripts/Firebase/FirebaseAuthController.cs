@@ -84,6 +84,13 @@ public class FirebaseAuthController : MonoBehaviour
         public bool returnSecureToken = true;
     }
 
+    [Serializable]
+    private class PasswordResetRequest
+    {
+        public string requestType = "PASSWORD_RESET";
+        public string email;
+    }
+
     // Goi ham nay de dang ky tai khoan moi
     public void Register(string email, string password, Action<bool, string> onComplete)
     {
@@ -272,6 +279,39 @@ public class FirebaseAuthController : MonoBehaviour
         {
             string errorMsg = ParseErrorMessage(request.downloadHandler.text);
             onComplete?.Invoke(false, "Failed to update display name: " + errorMsg);
+        }
+    }
+
+    // Goi ham nay khi nguoi choi bam "Forgot Password"
+    public void SendPasswordReset(string email, Action<bool, string> onComplete)
+    {
+        StartCoroutine(SendPasswordResetRequest(email, onComplete));
+    }
+
+    private IEnumerator SendPasswordResetRequest(string email, Action<bool, string> onComplete)
+    {
+        string url = SEND_VERIFICATION_URL + API_KEY; // dung chung URL voi sendOobCode
+        PasswordResetRequest reqBody = new PasswordResetRequest { email = email };
+        string jsonBody = JsonUtility.ToJson(reqBody);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        {
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                onComplete?.Invoke(true, "Password reset email sent. Please check your inbox.");
+            }
+            else
+            {
+                string errorMsg = ParseErrorMessage(request.downloadHandler.text);
+                onComplete?.Invoke(false, "Failed to send reset email: " + errorMsg);
+            }
         }
     }
 }

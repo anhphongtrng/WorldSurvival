@@ -200,4 +200,20 @@ public class LoginUI : MonoBehaviour
             statusText.text = message;
         });
     }
+
+    public void OnForgotPasswordClicked()
+    {
+        if (string.IsNullOrEmpty(emailInput.text))
+        {
+            statusText.text = "Please enter your email first.";
+            return;
+        }
+
+        statusText.text = "Sending reset email...";
+        authManager.SendPasswordReset(emailInput.text, (success, message) =>
+        {
+            statusText.text = message;
+            Debug.Log(message);
+        });
+    }
 }
