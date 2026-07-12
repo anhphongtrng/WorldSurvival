@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
@@ -7,6 +8,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private SceneLoader sceneLoader;
     [SerializeField] private VolumeSettings volumeSettings;
     [SerializeField] private GameObject rankBoardPanel;
+    [SerializeField] private TextMeshProUGUI welcomeText;
 
 
     protected void Awake()
@@ -20,6 +22,12 @@ public class MainMenuController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+        ShowPlayerName();
+    }
+
     // Button Play
     public void PlayGame()
     {
@@ -29,7 +37,7 @@ public class MainMenuController : MonoBehaviour
     // Button Quit
     public void QuitGame()
     {
-        Debug.Log("Logging out - quay về màn Login");
+        Debug.Log("Logging out! Returning to login screen...");
 
         // Delete Remember Me data
         PlayerPrefs.DeleteKey("SavedRefreshToken");
@@ -52,5 +60,19 @@ public class MainMenuController : MonoBehaviour
     public void CloseRankBoard()
     {
         rankBoardPanel.SetActive(false);
+    }
+
+    private void ShowPlayerName()
+    {
+        string displayName = FirebaseAuthController.CurrentDisplayName;
+
+        if (string.IsNullOrEmpty(displayName))
+        {
+            welcomeText.text = "Welcome, Player!";
+        }
+        else
+        {
+            welcomeText.text = "Welcome, " + displayName + "!";
+        }
     }
 }

@@ -7,6 +7,8 @@ public class LoginUI : MonoBehaviour
     [Header("UI Elements")]
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
+    public TMP_InputField confirmPasswordInput;
+    public TMP_InputField displayNameInput;
     public TMP_Text statusText;
     public Toggle rememberMeToggle;
 
@@ -26,8 +28,8 @@ public class LoginUI : MonoBehaviour
 
     void Start()
     {
-        authManager = gameObject.AddComponent<FirebaseAuthController>();
-        dbManager = gameObject.AddComponent<FirebaseDatabaseController>();
+        authManager = FirebaseController.instance.authController;
+        dbManager = FirebaseController.instance.dbController;
 
         loginPanel.SetActive(true);
         registerPanel.SetActive(false);
@@ -43,16 +45,26 @@ public class LoginUI : MonoBehaviour
 
         if (wasRemembered && !string.IsNullOrEmpty(savedToken))
         {
-            statusText.text = "Currently auto logging in...";
+            statusText.text = "Đang tự động đăng nhập...";
             authManager.RefreshLogin(savedToken, (success, message) =>
             {
-                statusText.text = message;
-                Debug.Log(message);
-
                 if (success)
                 {
-                    SaveRememberMe(); // cap nhat refresh token moi neu co
-                    sceneLoader.LoadNextScene("MainMenu");
+                    // RefreshLogin khong tra ve displayName, can goi them lookup de lay day du thong tin user
+                    authManager.CheckEmailVerified((checkSuccess, isVerified, checkMsg) =>
+                    {
+                        statusText.text = isVerified ? "Login successful!" : "Please verify your email.";
+
+                        if (isVerified)
+                        {
+                            SaveRememberMe();
+                            sceneLoader.LoadNextScene("MainMenu");
+                        }
+                    });
+                }
+                else
+                {
+                    statusText.text = message;
                 }
             });
         }
@@ -75,17 +87,47 @@ public class LoginUI : MonoBehaviour
 
     public void OnRegisterClicked()
     {
+        if (string.IsNullOrEmpty(displayNameInput.text))
+        {
+            statusText.text = "Please enter a display name.";
+            return;
+        }
+
+        if (string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text))
+        {
+            statusText.text = "Please fill in all fields.";
+            return;
+        }
+
+        if (passwordInput.text != confirmPasswordInput.text)
+        {
+            statusText.text = "Passwords do not match.";
+            return;
+        }
+
+        if (passwordInput.text.Length < 6)
+        {
+            statusText.text = "Password must be at least 6 characters.";
+            return;
+        }
+
         statusText.text = "Registering...";
         authManager.Register(emailInput.text, passwordInput.text, (success, message) =>
         {
             if (success)
             {
-                // Gui email xac thuc ngay sau khi tao tai khoan xong
-                authManager.SendEmailVerification((sent, sendMsg) =>
+                // Gan display name ngay sau khi tao tai khoan xong
+                authManager.UpdateDisplayName(displayNameInput.text, (updateSuccess, updateMsg) =>
                 {
-                    statusText.text = sent
-                        ? "Account created! A verification email has been sent to your inbox."
-                        : sendMsg;
+                    Debug.Log(updateMsg);
+
+                    // Gui email xac thuc sau khi da gan display name
+                    authManager.SendEmailVerification((sent, sendMsg) =>
+                    {
+                        statusText.text = sent
+                            ? "Account created! A verification email has been sent to your inbox."
+                            : sendMsg;
+                    });
                 });
             }
             else
@@ -112,8 +154,8 @@ public class LoginUI : MonoBehaviour
                     if (isVerified)
                     {
                         statusText.text = "Login successful!";
+                        Debug.Log("Display Name: " + FirebaseAuthController.CurrentDisplayName);
                         SaveRememberMe();
-                        TestWriteData();
                         sceneLoader.LoadNextScene("MainMenu");
                     }
                     else
@@ -127,16 +169,6 @@ public class LoginUI : MonoBehaviour
             {
                 statusText.text = message;
             }
-        });
-    }
-
-    private void TestWriteData()
-    {
-        string userId = FirebaseAuthController.CurrentUserId;
-        string jsonData = "{\"lastLogin\":\"" + System.DateTime.Now.ToString() + "\",\"level\":1}";
-        dbManager.SetData("players/" + userId, jsonData, (success, response) =>
-        {
-            Debug.Log(success ? "Data write successful: " + response : response);
         });
     }
 

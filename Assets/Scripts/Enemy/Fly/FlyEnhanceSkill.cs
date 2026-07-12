@@ -16,7 +16,7 @@ public class FlyEnhanceSkill : EnemySkills
     }
     protected override void OnSkill()
     {
-        if (flyController.flyRangeSkill.bulletCount == 5) return;
+        if (flyController.flyRangeSkill.bulletCount == 2) return;
         flyController.flyAnimation.TriggerEnhance();
         flyController.flyRangeSkill.bulletCount += 1;
     }

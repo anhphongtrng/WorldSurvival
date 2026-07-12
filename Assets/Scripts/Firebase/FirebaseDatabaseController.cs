@@ -65,4 +65,28 @@ public class FirebaseDatabaseController : MonoBehaviour
 
         return url;
     }
+
+    // Luu best time len Firebase, gan voi userId va displayName
+    public void SaveRankToFirebase(string sceneName, float timeUsed)
+    {
+        string userId = FirebaseAuthController.CurrentUserId;
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.Log("User not logged in, skip Firebase rank save");
+            return;
+        }
+
+        string displayName = FirebaseAuthController.CurrentDisplayName;
+        if (string.IsNullOrEmpty(displayName)) displayName = "Player";
+
+        string path = "leaderboards/" + sceneName + "/" + userId;
+        string jsonData = "{\"time\":" + timeUsed.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                         + ",\"displayName\":\"" + displayName + "\""
+                         + ",\"timestamp\":" + System.DateTimeOffset.UtcNow.ToUnixTimeSeconds() + "}";
+
+        SetData(path, jsonData, (success, response) =>
+        {
+            Debug.Log(success ? "Rank synced to Firebase" : "Failed to sync rank: " + response);
+        });
+    }
 }
