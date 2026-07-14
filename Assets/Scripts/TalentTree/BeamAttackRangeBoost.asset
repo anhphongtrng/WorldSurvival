@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Beam Attack Range Boost
   maxLevel: 4
-  description: add 1 to Beam Attack Range
+  description: Add 1 to Beam Attack Range.
   skillIcon: {fileID: 2680618784086664290, guid: d79d3049a09e7e4429fd9335291c0da6, type: 3}
   cooldown: 0

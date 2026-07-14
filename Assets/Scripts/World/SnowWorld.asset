@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldDataSO
   worldIndex: 1
   worldName: Snow World
-  worldDescription: A world with snow
+  worldDescription: A frozen realm buried under eternal snow, where biting winds
+    howl across icy plains and danger hides beneath every drift.
   worldThumbnail: {fileID: -876768315865088037, guid: 980db78f1fc47d4428d73da7f533504d, type: 3}
   worldSceneName: SnowWorld
   worldColor: {r: 0.012310382, g: 0.7252683, b: 0.93207544, a: 1}

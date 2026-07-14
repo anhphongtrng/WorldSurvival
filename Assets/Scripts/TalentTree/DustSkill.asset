@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Dust Skill
   maxLevel: 1
+  description: Creates a ring of dust that follows the character, dealing continuous
+    damage to enemies within it.
   skillIcon: {fileID: 1915886111900610273, guid: 449f7df3a4cf211488c5e6828273c307, type: 3}
+  cooldown: 0

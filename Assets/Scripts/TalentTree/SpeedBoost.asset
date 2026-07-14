@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Speed Boost
   maxLevel: 4
-  description: Add 1 to Speed
+  description: Add 1 to Speed.
   skillIcon: {fileID: -3040697513973818278, guid: d79d3049a09e7e4429fd9335291c0da6, type: 3}
   cooldown: 0

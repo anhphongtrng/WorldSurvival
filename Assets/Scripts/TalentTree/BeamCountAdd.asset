@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Beam Count Add
   maxLevel: 1
-  description: Add 1 more beam line to attack more enemies
+  description: Add 1 more beam line to attack more enemies.
   skillIcon: {fileID: 21300000, guid: dc464fbcfe3d24048a451722df7164e6, type: 3}
   cooldown: 0

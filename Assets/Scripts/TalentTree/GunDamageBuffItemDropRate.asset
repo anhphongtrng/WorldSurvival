@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Gun Damage Buff Item Drop Rate Boost
   maxLevel: 5
-  description: Add 1% Drop Rate
+  description: Add 1% Drop Rate.
   skillIcon: {fileID: 6879118450950661895, guid: c6c404b8c8bf51c488316f23043704f4, type: 3}
   cooldown: 0

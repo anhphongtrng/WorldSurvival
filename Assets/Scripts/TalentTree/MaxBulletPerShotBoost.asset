@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Max Bullet Per Shot Boost
   maxLevel: 3
-  description: 'Add 1 for max bullet per shot '
+  description: Add 1 for max bullet per shot.
   skillIcon: {fileID: -4270342437081465858, guid: d79d3049a09e7e4429fd9335291c0da6, type: 3}
   cooldown: 0

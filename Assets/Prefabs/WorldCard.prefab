@@ -184,7 +184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: -34}
+  m_AnchoredPosition: {x: -4, y: -24}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7564220777071222779
@@ -514,8 +514,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.6, y: -98.67}
-  m_SizeDelta: {x: 351.74, y: 87.5}
+  m_AnchoredPosition: {x: -0.0000019073, y: -95.70998}
+  m_SizeDelta: {x: 414.3, y: 93.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3114222453322521789
 CanvasRenderer:
@@ -547,8 +547,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: A scorching wasteland where ancient ruins hide beneath the endless sand.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -572,8 +572,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.51
-  m_fontSizeBase: 24.51
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -702,11 +702,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 798992598810331438, guid: 61bc0f09b39d53e469c0ecab8cb77b3b, type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 36.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 798992598810331438, guid: 61bc0f09b39d53e469c0ecab8cb77b3b, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 798992598810331438, guid: 61bc0f09b39d53e469c0ecab8cb77b3b, type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 36.7
       objectReference: {fileID: 0}
     - target: {fileID: 3414385247930682760, guid: 61bc0f09b39d53e469c0ecab8cb77b3b, type: 3}
       propertyPath: m_AnchoredPosition.x

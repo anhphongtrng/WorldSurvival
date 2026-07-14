@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Water Skill
   maxLevel: 1
+  description: Deals damage to enemies within a targeted area.
   skillIcon: {fileID: -1556639223334293588, guid: c81c46d6069bf604a8bbc3d36dae1a56, type: 3}
+  cooldown: 0

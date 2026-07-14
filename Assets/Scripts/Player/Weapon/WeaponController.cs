@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
 {
     [SerializeField] GameObject beamObject;
     [SerializeField] GameObject gunObject;
+    [SerializeField] GameObject ammoUI;
 
     GameObject currentWeapon;
     protected string worldName;
@@ -31,10 +32,12 @@ public class WeaponController : MonoBehaviour
         if(Keyboard.current.digit1Key.wasPressedThisFrame)
         {
             EquipWeapon(gunObject);
+            ammoUI.SetActive(true);
         }
         else if(Keyboard.current.digit2Key.wasPressedThisFrame)
         {
             EquipWeapon(beamObject);
+            ammoUI.SetActive(false);
         }
     }
 
@@ -56,10 +59,12 @@ public class WeaponController : MonoBehaviour
             case "DesertWorld":
                 EquipWeapon(beamObject);
                 Debug.Log("Equipped Beam Weapon for DesertWorld");
+                ammoUI.SetActive(false);
                 break;
             case "SnowWorld":
                 EquipWeapon(gunObject);
                 Debug.Log("Equipped Gun Weapon for SnowWorld");
+                ammoUI.SetActive(true);
                 break;
             default:
                 EquipWeapon(beamObject);

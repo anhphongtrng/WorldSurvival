@@ -27,7 +27,7 @@ public class LoadingScreenController : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < fakeLoadDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float progress = Mathf.Clamp01(elapsed / fakeLoadDuration);
             progressSlider.value = progress;
             if (progressText != null)

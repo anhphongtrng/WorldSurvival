@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldDataSO
   worldIndex: 0
   worldName: Desert World
-  worldDescription: A World with Desert
+  worldDescription: A scorching wasteland of endless sand dunes, where the sun burns
+    relentlessly and danger lurks beneath every wave of dust.
   worldThumbnail: {fileID: 7742116141124233151, guid: 58867c855677fa349844eac871b2991e, type: 3}
   worldSceneName: DesertWorld
   worldColor: {r: 1, g: 0.49274513, b: 0, a: 1}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Healing Skill
   maxLevel: 1
-  description: Use to Heal 1 HP
+  description: Use to Heal 1 HP.
   skillIcon: {fileID: 8105470336463822503, guid: 60284ab8b586dfb4b99081132aa4733f, type: 3}
   cooldown: 0

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Fire Skill
   maxLevel: 1
-  description: 
+  description: Creates an explosion that deals continuous damage in a straight direction.
   skillIcon: {fileID: 3570182968233781638, guid: 34216e374648a2b498f7b6c2224e4612, type: 3}
   cooldown: 0

@@ -4,13 +4,19 @@ public class PlayerGetItem : MonoBehaviour
 {
     [Header("Music")]
     public AudioClip getItemClip; // Music played when player gets an item
+
+    [Header("Prefabs")]
+    public GameObject healingPrefab;
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("HealItem"))
         {
             AudioController.instance.PlaySFX(getItemClip);
             StatsController.instance.UpdateCurrentHealth(1f);
+            GameObject healingEffect = Instantiate(healingPrefab, transform.position, Quaternion.identity);
+            healingEffect.transform.SetParent(transform);
             Destroy(collision.gameObject);
+            Destroy(healingEffect, 1f);
         }
 
         else if (collision.CompareTag("BeamDamageBuffItem"))

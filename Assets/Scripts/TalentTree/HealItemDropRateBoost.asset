@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Heal Item Drop Rate Boost
   maxLevel: 5
-  description: Add 1% Drop Rate
+  description: Add 1% Drop Rate.
   skillIcon: {fileID: 2690274267995810836, guid: 86dcbe28185901547a2553d964a6fae7, type: 3}
   cooldown: 0

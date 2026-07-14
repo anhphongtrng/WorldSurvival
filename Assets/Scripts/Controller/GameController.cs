@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private bool isFinalBossUnlocked = false;
     [SerializeField] private bool isStageComplete = false;
     protected float delayBeforeEndGame = 1f;
+    [SerializeField] private float invincibleDuration = 3f;
+    [SerializeField] private float flickerInterval = 0.1f;
 
     [Header("Music")]
     public AudioClip playerDeathClip;
@@ -36,8 +38,11 @@ public class GameController : MonoBehaviour
     [Header("Boss Phase")]
     public BossPhase currentBossPhase = BossPhase.MiniBoss;
 
+    [Header("Components")]
     [SerializeField] protected BossArrowIndicator bossArrowIndicator;
     [SerializeField] protected GameSceneController gameSceneController;
+    [SerializeField] protected PlayerDamageReceiver playerDamageReceiver;
+    [SerializeField] protected SpriteRenderer playerSprite;
 
     public enum BossPhase
     {
@@ -55,6 +60,11 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ProtectRoutine());
     }
 
     private void Update()
@@ -193,6 +203,7 @@ public class GameController : MonoBehaviour
         isStageComplete = false;
         worldLevel++;
         AudioController.instance.PlayBGM(normalPhaseClip);
+        StartCoroutine(ProtectRoutine());
     }
 
     public void OnPlayerDead()
@@ -215,5 +226,21 @@ public class GameController : MonoBehaviour
         //UIController.instance.ShowGameOverMenu(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Debug.Log("Game Restarted");
+    }
+
+    private IEnumerator ProtectRoutine()
+    {
+        playerDamageReceiver.SetInvincible(true);
+
+        float elapsed = 0f;
+        while (elapsed < invincibleDuration)
+        {
+            playerSprite.enabled = !playerSprite.enabled;
+            yield return new WaitForSeconds(flickerInterval);
+            elapsed += flickerInterval;
+        }
+
+        playerSprite.enabled = true;
+        playerDamageReceiver.SetInvincible(false);
     }
 }

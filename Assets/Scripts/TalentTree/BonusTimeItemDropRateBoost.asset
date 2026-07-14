@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   skillName: Bonus Time Item Drop Rate Boost
   maxLevel: 5
-  description: Add 1% Drop Rate
+  description: Add 1% Drop Rate.
   skillIcon: {fileID: -5373949792807698244, guid: 2e8ab1a9aa30776479e2aa978ce96023, type: 3}
   cooldown: 0
